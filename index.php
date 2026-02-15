@@ -9,10 +9,17 @@
 <body>
 
 <nav>
-    <a class="logo" href="index.php">
-        <img src="ccs-logo.png" alt="CCS logo">
-        <span>CCS Sit-in System</span>
-    </a>
+    <div class="brand">
+        <a class="logo" href="index.php">
+            <span class="logo-mark">
+                <img src="ccs-logo.png" alt="CCS logo">
+            </span>
+            <span>CCS Sit-in System</span>
+        </a>
+        <div class="nav-badge">
+            <img src="uc-logo.png" alt="University of Cebu logo">
+        </div>
+    </div>
     <div class="nav-links">
         <a href="index.php">Home</a>
         <div class="dropdown">
@@ -30,12 +37,13 @@
 </nav>
 
 <section class="hero">
-    <h1>Efficient Lab Management</h1>
-    <p>Track your laboratory hours, view available slots, and manage your sit-in sessions with the official CCS Monitoring System.</p>
-    
-    <div class="btn-group">
-        <a href="login.php" class="btn btn-primary">Student Login</a>
-        <a href="register.php" class="btn btn-outline">Create Account</a>
+    <div class="hero-inner">
+        <h1>Efficient Lab Management</h1>
+        <p>Track your laboratory hours, view available slots, and manage your sit-in sessions with the official CCS Monitoring System.</p>
+        <div class="btn-group">
+            <a href="login.php" class="btn btn-primary">Student Login</a>
+            <a href="register.php" class="btn btn-outline">Create Account</a>
+        </div>
     </div>
 </section>
 
