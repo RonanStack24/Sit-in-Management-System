@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,7 +29,7 @@
 </section>
 
 </body>
-=======
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -81,5 +80,4 @@
 </section>
 
 </body>
->>>>>>> push
 </html>
