@@ -8,6 +8,7 @@
 </head>
 <body>
 
+<!-- Top navigation -->
 <nav>
     <div class="brand">
         <a class="logo" href="index.php">
@@ -36,6 +37,7 @@
     </div>
 </nav>
 
+<!-- Hero banner -->
 <section class="hero">
     <div class="hero-inner">
         <h1>Efficient Lab Management</h1>
