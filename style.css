@@ -1,156 +1,78 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
 
-/* Basic page setup */
 body {
-  margin: 0;
   font-family: "Inter", sans-serif;
   background: #f8fafc;
   color: #1e293b;
 }
 
-/* Top navigation bar */
-nav {
+/* Brand colors */
+.navbar-custom {
   background: #003366;
-  color: white;
-  padding: 16px 5%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+.nav-link-fade {
+  opacity: 0.85;
+  transition: opacity 0.2s;
 }
 
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: 700;
-  font-size: 1.2rem;
-  color: white;
-  text-decoration: none;
+.nav-link-fade:hover {
+  opacity: 1;
 }
 
-.logo-mark,
-.nav-badge {
+.btn-primary {
+  background: #003366;
+  border-color: #003366;
+}
+
+.btn-primary:hover {
+  background: #004b93;
+  border-color: #004b93;
+}
+
+.btn-outline-primary {
+  border-color: #003366;
+  color: #003366;
+}
+
+.btn-outline-primary:hover {
+  background: #f1f5f9;
+  color: #003366;
+}
+
+/* Logo pills */
+.brand-pill {
   background: rgba(255, 255, 255, 0.92);
   border-radius: 999px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
 }
 
-.logo-mark {
+.logo-pill {
   padding: 4px;
 }
 
-.nav-badge {
+.badge-pill {
   padding: 4px 10px;
 }
 
-.logo img {
+.brand-logo {
   width: 36px;
   height: 36px;
   object-fit: contain;
 }
 
-.nav-badge img {
+.brand-badge {
   height: 26px;
   width: auto;
   display: block;
 }
 
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.nav-links a,
-.dropdown-toggle {
-  color: white;
-  text-decoration: none;
-  font-size: 0.9rem;
-  opacity: 0.85;
-  transition: opacity 0.2s;
-}
-
-.nav-links a:hover,
-.dropdown-toggle:hover,
-.dropdown:hover .dropdown-toggle {
-  opacity: 1;
-}
-
-/* Dropdown menu */
-.dropdown {
-  position: relative;
-}
-
-.dropdown-toggle {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.dropdown-toggle::after {
-  content: "";
-  width: 0;
-  height: 0;
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-top: 5px solid white;
-}
-
-.dropdown-menu {
-  position: absolute;
-  top: 140%;
-  left: 0;
-  min-width: 180px;
-  background: white;
-  color: #1e293b;
-  border-radius: 10px;
-  padding: 10px 0;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-6px);
-  transition: 0.2s ease;
-  z-index: 10;
-}
-
-.dropdown:hover .dropdown-menu {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.dropdown-menu a {
-  display: block;
-  padding: 10px 16px;
-  color: #1e293b;
-  text-decoration: none;
-  font-size: 0.9rem;
-}
-
-.dropdown-menu a:hover {
-  background: #f1f5f9;
-}
-
-/* Hero section */
-.hero {
+/* Hero + register backgrounds */
+.hero-section {
   min-height: 75vh;
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 32px 20px 64px;
   background: radial-gradient(
     1200px 400px at 50% 0%,
     #eef2ff 0%,
@@ -159,200 +81,20 @@ nav {
   );
 }
 
-.hero-inner {
+.hero-card {
   max-width: 720px;
-  width: 100%;
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 20px;
-  padding: 40px 48px;
-  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
 }
 
-.hero h1 {
-  font-size: 2.6rem;
-  margin-bottom: 0.8rem;
-  color: #0f172a;
-}
-
-.hero p {
-  font-size: 1.05rem;
-  color: #64748b;
+.hero-text {
   max-width: 560px;
-  margin: 0 auto 1.8rem;
-  line-height: 1.6;
 }
 
-.btn-group {
-  display: flex;
-  gap: 15px;
-}
-
-/* Buttons */
-.btn {
-  padding: 12px 30px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: 0.2s;
-}
-
-.btn-primary {
-  background: #003366;
-  color: white;
-}
-
-.btn-primary:hover {
-  background: #004b93;
-}
-
-.btn-outline {
-  border: 2px solid #003366;
-  color: #003366;
-}
-
-.btn-outline:hover {
-  background: #f1f5f9;
-}
-
-/* Register page */
-.register-page {
+.register-section {
   min-height: calc(100vh - 86px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 40px 20px 80px;
   background: radial-gradient(
     1000px 420px at 50% -10%,
     #eef2ff 0%,
     #f8fafc 55%,
     #f8fafc 100%
   );
-}
-
-.register-card {
-  width: min(980px, 100%);
-  background: white;
-  border-radius: 24px;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.08);
-  padding: 32px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32px;
-}
-
-.register-form {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.register-form h1 {
-  margin: 8px 0 6px;
-  font-size: 2rem;
-  color: #0f172a;
-}
-
-.back-link {
-  align-self: flex-start;
-  background: #ef4444;
-  color: white;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-decoration: none;
-  padding: 6px 12px;
-  border-radius: 6px;
-}
-
-.register-form form {
-  display: grid;
-  gap: 10px;
-}
-
-.register-form label {
-  font-size: 0.78rem;
-  color: #475569;
-  font-weight: 600;
-}
-
-.register-form input {
-  width: 100%;
-  padding: 9px 12px;
-  border: 1px solid #cbd5f5;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  color: #0f172a;
-  background: white;
-  transition: 0.2s;
-}
-
-.register-form input:focus {
-  outline: none;
-  border-color: #6366f1;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
-}
-
-.register-form .btn {
-  margin-top: 8px;
-  width: fit-content;
-}
-
-.register-visual {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.visual-card {
-  width: min(360px, 100%);
-  background: #f8fafc;
-  border-radius: 22px;
-  border: 1px solid #e2e8f0;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.register-image {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-}
-
-/* Responsive tweaks */
-@media (max-width: 900px) {
-  .register-card {
-    grid-template-columns: 1fr;
-  }
-
-  .register-visual {
-    order: -1;
-  }
-}
-
-@media (max-width: 640px) {
-  .hero-inner {
-    padding: 28px 22px;
-  }
-
-  .hero h1 {
-    font-size: 2.1rem;
-  }
-
-  .btn-group {
-    flex-direction: column;
-  }
-}
-
-@media (max-width: 600px) {
-  .register-card {
-    padding: 24px 18px;
-  }
-
-  .register-form h1 {
-    font-size: 1.7rem;
-  }
 }
