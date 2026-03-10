@@ -1,4 +1,4 @@
-﻿document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
   const passwordBox = document.getElementById("password");
   const confirmBox = document.getElementById("confirm_password");
 

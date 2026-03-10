@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 session_start();
 require 'db.php';
 
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             to   { opacity: 1; }
         }
 
-        /* slideUp ΓÇö element fades in while rising up from below */
+        /* slideUp — element fades in while rising up from below */
         @keyframes slideUp {
             from { opacity: 0; transform: translateY(28px); }
             to   { opacity: 1; transform: translateY(0); }
@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .anim-fade  { animation: fadeIn  0.6s ease both; }
         .anim-slide { animation: slideUp 0.55s ease both; }
 
-        /* Delay class ΓÇö card starts animating slightly after the page loads */
+        /* Delay class — card starts animating slightly after the page loads */
         .delay-1 { animation-delay: 0.1s; }
     </style>
 </head>
@@ -154,7 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <!-- Illustration column -->
                 <div class="hidden lg:flex flex-col items-center justify-center gap-6 text-center">
                     <div class="w-full max-w-[320px] bg-[#003366] rounded-[22px] px-8 py-10 text-white">
-                        <div class="text-4xl mb-4">≡ƒûÑ∩╕Å</div>
+                        <div class="text-4xl mb-4">🖥️</div>
                         <h2 class="text-lg font-bold mb-2">CCS Laboratory</h2>
                         <p class="text-sm text-white/75 leading-relaxed">
                             Monitor your sit-in sessions, track remaining hours, and reserve your lab slot all in one place.
