@@ -1,0 +1,2 @@
+# Ignore the real database config — contains credentials
+db.php
