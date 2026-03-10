@@ -30,8 +30,25 @@
         .anim-slide { animation: slideUp 0.55s ease both; }
 
         /* Delay classes — stagger animations so elements appear one at a time */
-        .delay-1 { animation-delay: 0.10s; }  /* waits 0.10s before starting */
-        .delay-2 { animation-delay: 0.25s; }  /* waits 0.25s before starting */
+        .delay-1 { animation-delay: 0.10s; }
+        .delay-2 { animation-delay: 0.25s; }
+
+        /* ============================================
+           SCROLL-REVEAL ANIMATIONS
+           ============================================ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(36px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.10s; }
+        .reveal-delay-2 { transition-delay: 0.20s; }
+        .reveal-delay-3 { transition-delay: 0.30s; }
+        .reveal-delay-4 { transition-delay: 0.40s; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-[Inter]">
@@ -70,6 +87,135 @@
         </div>
     </div>
 </section>
+
+<!-- ================================
+     STATS BANNER
+     ================================ -->
+<section class="bg-[#003366] py-10 px-5">
+    <div class="max-w-4xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-6 text-center text-white">
+        <div class="reveal reveal-delay-1">
+            <div class="text-3xl font-bold">30</div>
+            <div class="text-xs text-white/60 mt-1 uppercase tracking-wide">Max Sessions</div>
+        </div>
+        <div class="reveal reveal-delay-2">
+            <div class="text-3xl font-bold">5</div>
+            <div class="text-xs text-white/60 mt-1 uppercase tracking-wide">Laboratories</div>
+        </div>
+        <div class="reveal reveal-delay-3">
+            <div class="text-3xl font-bold">24/7</div>
+            <div class="text-xs text-white/60 mt-1 uppercase tracking-wide">Monitoring</div>
+        </div>
+        <div class="reveal reveal-delay-4">
+            <div class="text-3xl font-bold">100%</div>
+            <div class="text-xs text-white/60 mt-1 uppercase tracking-wide">Free to Use</div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================
+     FEATURES SECTION
+     ================================ -->
+<section class="py-20 px-5 bg-slate-50">
+    <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-12 reveal">
+            <span class="text-xs font-bold uppercase tracking-widest text-indigo-500">Features</span>
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-2">Everything you need in one place</h2>
+            <p class="text-slate-500 mt-2 text-sm">Built specifically for CCS students and laboratory staff.</p>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="reveal reveal-delay-1 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:-translate-y-1 hover:shadow-md transition-all duration-300">
+                <div class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-xl mb-4">🕐</div>
+                <h3 class="font-bold text-slate-800 mb-1">Session Tracking</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">Keep track of how many sit-in sessions you have left out of your 30 allowed sessions.</p>
+            </div>
+            <div class="reveal reveal-delay-2 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:-translate-y-1 hover:shadow-md transition-all duration-300">
+                <div class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-xl mb-4">🖥️</div>
+                <h3 class="font-bold text-slate-800 mb-1">Lab Reservation</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">Check available computers across all 5 CCS laboratories and reserve your slot in advance.</p>
+            </div>
+            <div class="reveal reveal-delay-3 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:-translate-y-1 hover:shadow-md transition-all duration-300">
+                <div class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-xl mb-4">📋</div>
+                <h3 class="font-bold text-slate-800 mb-1">Sit-in History</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">View a full log of your previous sit-in sessions including dates, labs used, and duration.</p>
+            </div>
+            <div class="reveal reveal-delay-1 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:-translate-y-1 hover:shadow-md transition-all duration-300">
+                <div class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-xl mb-4">🔔</div>
+                <h3 class="font-bold text-slate-800 mb-1">Instant Alerts</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">Get notified when your sessions are running low or when your reservation is confirmed.</p>
+            </div>
+            <div class="reveal reveal-delay-2 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:-translate-y-1 hover:shadow-md transition-all duration-300">
+                <div class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-xl mb-4">🔒</div>
+                <h3 class="font-bold text-slate-800 mb-1">Secure Login</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">Your account is protected with an encrypted password. Only you can access your data.</p>
+            </div>
+            <div class="reveal reveal-delay-3 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:-translate-y-1 hover:shadow-md transition-all duration-300">
+                <div class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-xl mb-4">📱</div>
+                <h3 class="font-bold text-slate-800 mb-1">Mobile Friendly</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">Fully responsive design works on your phone, tablet, or desktop without any app install.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================
+     HOW IT WORKS SECTION
+     ================================ -->
+<section class="py-20 px-5 bg-white">
+    <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12 reveal">
+            <span class="text-xs font-bold uppercase tracking-widest text-indigo-500">How It Works</span>
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-2">Get started in 3 simple steps</h2>
+        </div>
+        <div class="grid sm:grid-cols-3 gap-8 text-center">
+            <div class="reveal reveal-delay-1">
+                <div class="w-12 h-12 rounded-full bg-[#003366] text-white font-bold text-lg flex items-center justify-center mx-auto mb-4">1</div>
+                <h3 class="font-bold text-slate-800 mb-1">Create an Account</h3>
+                <p class="text-sm text-slate-500">Register using your student ID, name, course, and email. Takes less than a minute.</p>
+            </div>
+            <div class="reveal reveal-delay-2">
+                <div class="w-12 h-12 rounded-full bg-[#003366] text-white font-bold text-lg flex items-center justify-center mx-auto mb-4">2</div>
+                <h3 class="font-bold text-slate-800 mb-1">Log In</h3>
+                <p class="text-sm text-slate-500">Sign in with your ID number and password to access your personal dashboard.</p>
+            </div>
+            <div class="reveal reveal-delay-3">
+                <div class="w-12 h-12 rounded-full bg-[#003366] text-white font-bold text-lg flex items-center justify-center mx-auto mb-4">3</div>
+                <h3 class="font-bold text-slate-800 mb-1">Manage Sessions</h3>
+                <p class="text-sm text-slate-500">Track your remaining sessions, reserve a lab slot, and view your sit-in history.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================
+     CTA SECTION
+     ================================ -->
+<section class="py-20 px-5 bg-[radial-gradient(900px_300px_at_50%_50%,#eef2ff,#f8fafc)]">
+    <div class="max-w-xl mx-auto text-center reveal">
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-3">Ready to get started?</h2>
+        <p class="text-slate-500 text-sm mb-7">Create your free account now and take control of your lab sessions.</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="register.php" class="px-8 py-3 rounded-lg font-semibold bg-[#003366] text-white hover:bg-[#004b93] transition">Register Now</a>
+            <a href="login.php" class="px-8 py-3 rounded-lg font-semibold border-2 border-[#003366] text-[#003366] hover:bg-slate-100 transition">Sign In</a>
+        </div>
+    </div>
+</section>
+
+<!-- Scroll-reveal script -->
+<script>
+(function () {
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(function (el) {
+        observer.observe(el);
+    });
+})();
+</script>
 
 </body>
 </html>
