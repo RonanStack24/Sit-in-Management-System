@@ -137,8 +137,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
 
                         <div>
+                            <label class="text-xs font-semibold text-slate-600" for="course">Course</label>
+                            <input class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200/60" id="course" name="course" type="text" placeholder="BSIT" required>
+                        </div>
+
+                        <div>
                             <label class="text-xs font-semibold text-slate-600" for="course_level">Course Level</label>
                             <input class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200/60" id="course_level" name="course_level" type="text" placeholder="e.g. 1">
+                        </div>
+
+                        <div>
+                            <label class="text-xs font-semibold text-slate-600" for="email">Email</label>
+                            <input class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200/60" id="email" name="email" type="email" placeholder="name@example.com" required>
                         </div>
 
                         <div>
@@ -149,16 +159,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div>
                             <label class="text-xs font-semibold text-slate-600" for="confirm_password">Repeat your password</label>
                             <input class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200/60" id="confirm_password" name="confirm_password" type="password" placeholder="Repeat your password" required>
-                        </div>
-
-                        <div>
-                            <label class="text-xs font-semibold text-slate-600" for="email">Email</label>
-                            <input class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200/60" id="email" name="email" type="email" placeholder="name@example.com" required>
-                        </div>
-
-                        <div>
-                            <label class="text-xs font-semibold text-slate-600" for="course">Course</label>
-                            <input class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200/60" id="course" name="course" type="text" placeholder="BSIT" required>
                         </div>
 
                         <div>
