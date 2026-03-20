@@ -4,7 +4,7 @@ require 'db.php';
 
 // Check if user is admin
 if (!isset($_SESSION['admin_id']) || !isset($_SESSION['is_admin'])) {
-    header('Location: admin_login.php');
+    header('Location: login.php');
     exit;
 }
 
@@ -36,37 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     $lab = trim($_POST['lab'] ?? '');
     
     if ($student_id && $purpose && $lab) {
-        // Check if sitin_sessions table exists, if not create it
-        try {
-            $check_table = $pdo->query("SHOW TABLES LIKE 'sitin_sessions'");
-            if ($check_table->rowCount() === 0) {
-                $pdo->exec("
-                    CREATE TABLE sitin_sessions (
-                        id INT PRIMARY KEY AUTO_INCREMENT,
-                        student_id INT NOT NULL,
-                        purpose VARCHAR(255),
-                        lab VARCHAR(50),
-                        entry_time DATETIME DEFAULT CURRENT_TIMESTAMP,
-                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                        FOREIGN KEY (student_id) REFERENCES students(id)
-                    )
-                ");
-            } else {
-                // Check if columns exist, if not add them
-                $check_purpose = $pdo->query("SHOW COLUMNS FROM sitin_sessions LIKE 'purpose'");
-                if ($check_purpose->rowCount() === 0) {
-                    $pdo->exec("ALTER TABLE sitin_sessions ADD COLUMN purpose VARCHAR(255) AFTER student_id");
-                }
-                
-                $check_lab = $pdo->query("SHOW COLUMNS FROM sitin_sessions LIKE 'lab'");
-                if ($check_lab->rowCount() === 0) {
-                    $pdo->exec("ALTER TABLE sitin_sessions ADD COLUMN lab VARCHAR(50) AFTER purpose");
-                }
-            }
-        } catch (Exception $e) {
-            // Table or columns already exist
-        }
-        
         // Insert sit-in record
         $stmt = $pdo->prepare('INSERT INTO sitin_sessions (student_id, purpose, lab, entry_time) VALUES (?, ?, ?, NOW())');
         $stmt->execute([$student_id, $purpose, $lab]);
@@ -100,6 +69,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     <title>Admin Dashboard | CCS Sit-in Monitoring</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/admin-dashboard.js"></script>
 </head>
 <body class="bg-slate-50 text-slate-800 font-[Inter]">
 
@@ -371,27 +342,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     <span id="toast-msg"></span>
 </div>
 
+<?php if ($message): ?>
 <script>
-function validateForm() {
-    const purpose = document.querySelector('select[name="purpose"]').value;
-    const lab = document.querySelector('select[name="lab"]').value;
-    const validationMsg = document.getElementById('validation_message');
-    const submitBtn = document.getElementById('submit_btn');
-    
-    if (purpose && lab) {
-        validationMsg.classList.add('hidden');
-        submitBtn.disabled = false;
-    } else {
-        validationMsg.classList.remove('hidden');
-        submitBtn.disabled = true;
-    }
-}
-
-// Initialize form validation on page load
-document.addEventListener('DOMContentLoaded', function() {
-    validateForm();
+document.addEventListener('DOMContentLoaded', function () {
+    showToast('<?= htmlspecialchars($message, ENT_QUOTES) ?>');
 });
 </script>
+<?php endif; ?>
 
 </body>
 </html>

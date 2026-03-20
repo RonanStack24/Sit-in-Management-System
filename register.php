@@ -48,6 +48,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Register | CCS Sit-in Monitoring</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/app.js"></script>
     <style>
         /* ============================================
            PAGE ANIMATIONS
@@ -71,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .anim-fade  { animation: fadeIn  0.6s ease both; }
         .anim-slide { animation: slideUp 0.55s ease both; }
 
-        /* Delay class ΓÇö card starts animating slightly after the page loads */
+        /* Delay class card starts animating slightly after the page loads */
         .delay-1 { animation-delay: 0.1s; }
     </style>
 </head>
@@ -178,34 +180,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </section>
 
-<script src="app.js"></script>
-
 <!-- Toast notification -->
 <div id="toast" class="fixed bottom-6 right-6 z-50 hidden items-center gap-3 bg-[#003366] text-white text-sm font-semibold px-5 py-3 rounded-xl shadow-lg">
     <svg class="w-5 h-5 shrink-0 text-green-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
     <span id="toast-msg"></span>
 </div>
-
-<?php if ($success): ?>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    showToast('Account created successfully! You can now sign in.');
-});
-</script>
-<?php endif; ?>
-
-<script>
-function showToast(msg) {
-    var t = document.getElementById('toast');
-    document.getElementById('toast-msg').textContent = msg;
-    t.classList.remove('hidden');
-    t.classList.add('flex');
-    setTimeout(function () {
-        t.classList.add('opacity-0', 'transition-opacity', 'duration-500');
-        setTimeout(function () { t.classList.add('hidden'); t.classList.remove('flex', 'opacity-0'); }, 500);
-    }, 3500);
-}
-</script>
 
 </body>
 </html>

@@ -6,14 +6,33 @@ $error   = '';
 $success = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $id_number = trim($_POST['id_number'] ?? '');
-    $password  = trim($_POST['password']  ?? '');
+    $username = trim($_POST['username'] ?? '');
+    $password = trim($_POST['password'] ?? '');
 
-    if ($id_number === '' || $password === '') {
+    if ($username === '' || $password === '') {
         $error = 'Please fill in all fields.';
     } else {
+        $user_found = false;
+
+        // First check if it's an admin (username login)
+        try {
+            $stmt = $pdo->prepare('SELECT id, username, password FROM admin_users WHERE username = ? LIMIT 1');
+            $stmt->execute([$username]);
+            $admin = $stmt->fetch();
+            
+            if ($admin && password_verify($password, $admin['password'])) {
+                $_SESSION['admin_id'] = $admin['id'];
+                $_SESSION['is_admin'] = true;
+                header('Location: admin_dashboard.php');
+                exit;
+            }
+        } catch (Exception $e) {
+            // Continue to check students
+        }
+
+        // If not admin, check if it's a student (ID number login)
         $stmt = $pdo->prepare('SELECT * FROM students WHERE id_number = ?');
-        $stmt->execute([$id_number]);
+        $stmt->execute([$username]);
         $user = $stmt->fetch();
 
         if ($user && password_verify($password, $user['password'])) {
@@ -23,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: dashboard.php?toast=login');
             exit;
         } else {
-            $error = 'Invalid ID number or password.';
+            $error = 'Invalid username/ID number or password.';
         }
     }
 }
@@ -36,6 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Login | CCS Sit-in Monitoring</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="js/utils.js"></script>
     <style>
         /* ============================================
            PAGE ANIMATIONS
@@ -85,13 +105,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <!-- Form column -->
                 <div>
                     <a class="inline-flex items-center rounded-md bg-red-500 px-3 py-1 text-xs font-semibold text-white" href="index.php">Back</a>
-                    <h1 class="text-2xl font-bold text-slate-900 mt-3 mb-1">Welcome back</h1>
-                    <p class="text-sm text-slate-500 mb-5">Sign in to your CCS Sit-in account.</p>
+                    <h1 class="text-2xl font-bold text-slate-900 mt-3 mb-1">Sign In</h1>
+                    <p class="text-sm text-slate-500 mb-5">Enter your credentials to log in.</p>
 
                     <?php /* Show a red alert box if something went wrong */ ?>
                     <?php if ($error): ?>
                     <div class="mb-4 rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">
-                        <?= htmlspecialchars($error) /* htmlspecialchars stops XSS attacks */ ?>
+                        <?= htmlspecialchars($error) ?>
                     </div>
                     <?php endif; ?>
 
@@ -103,20 +123,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <?php endif; ?>
 
                     <form action="login.php" method="post" class="grid gap-4">
+                        <!-- Username/ID Number Input -->
                         <div>
-                            <label class="text-xs font-semibold text-slate-600" for="id_number">ID Number</label>
+                            <label class="text-xs font-semibold text-slate-600" for="username">Username or Student ID</label>
                             <input
                                 class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200/60"
-                                id="id_number"
-                                name="id_number"
+                                id="username"
+                                name="username"
                                 type="text"
-                                placeholder="e.g. 2024-00001"
-                                value="<?= htmlspecialchars($_POST['id_number'] ?? '') ?>"
+                                placeholder="e.g. 2024-00001 (student) or admin (admin)"
+                                value="<?= htmlspecialchars($_POST['username'] ?? '') ?>"
                                 required
                                 autofocus   
                             >
                         </div>
 
+                        <!-- Password Input -->
                         <div>
                             <div class="flex items-center justify-between mb-1">
                                 <label class="text-xs font-semibold text-slate-600" for="password">Password</label>
@@ -145,8 +167,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </button>
                     </form>
 
+                    <!-- Student register link -->
                     <p class="mt-5 text-xs text-slate-500">
-                        Don't have an account?
+                        Don't have a student account?
                         <a href="register.php" class="text-indigo-600 font-semibold hover:underline">Register here</a>
                     </p>
                 </div>
@@ -186,19 +209,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <svg class="w-5 h-5 shrink-0 text-green-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
     <span id="toast-msg"></span>
 </div>
-
-<script>
-function showToast(msg) {
-    var t = document.getElementById('toast');
-    document.getElementById('toast-msg').textContent = msg;
-    t.classList.remove('hidden');
-    t.classList.add('flex');
-    setTimeout(function () {
-        t.classList.add('opacity-0', 'transition-opacity', 'duration-500');
-        setTimeout(function () { t.classList.add('hidden'); t.classList.remove('flex', 'opacity-0'); }, 500);
-    }, 3500);
-}
-</script>
 
 </body>
 </html>

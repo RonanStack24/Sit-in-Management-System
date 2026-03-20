@@ -16,6 +16,11 @@ $student = $stmt->fetch();
 $user_id = $_SESSION['user_id'];
 $toast_message = '';
 
+// Check for login toast
+if (isset($_GET['toast']) && $_GET['toast'] === 'login') {
+    $toast_message = 'Welcome back, ' . htmlspecialchars($student['first_name']) . '!';
+}
+
 // Handle photo upload
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'upload_photo') {
     if (isset($_FILES['profile_photo']) && $_FILES['profile_photo']['error'] === UPLOAD_ERR_OK) {
@@ -71,6 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     <title>Dashboard | CCS Sit-in Monitoring</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="js/utils.js"></script>
 </head>
 <body class="bg-slate-50 text-slate-800 font-[Inter]">
 
@@ -235,26 +241,7 @@ document.addEventListener('DOMContentLoaded', function () {
     showToast('<?= htmlspecialchars($toast_message, ENT_QUOTES) ?>');
 });
 </script>
-<?php elseif (($_GET['toast'] ?? '') === 'login'): ?>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    showToast('Welcome back, <?= htmlspecialchars($student['first_name'], ENT_QUOTES) ?>! You are now logged in.');
-});
-</script>
 <?php endif; ?>
-
-<script>
-function showToast(msg) {
-    var t = document.getElementById('toast');
-    document.getElementById('toast-msg').textContent = msg;
-    t.classList.remove('hidden');
-    t.classList.add('flex');
-    setTimeout(function () {
-        t.classList.add('opacity-0', 'transition-opacity', 'duration-500');
-        setTimeout(function () { t.classList.add('hidden'); t.classList.remove('flex', 'opacity-0'); }, 500);
-    }, 3500);
-}
-</script>
 
 </body>
 </html>

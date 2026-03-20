@@ -5,7 +5,7 @@ require 'db.php';
 // Check admin
 $is_admin = isset($_SESSION['admin_id']) && $_SESSION['is_admin'];
 if (!$is_admin) {
-    header('Location: admin_login.php');
+    header('Location: login.php');
     exit;
 }
 
@@ -19,10 +19,8 @@ if ($filter_student) {
             ss.id, 
             ss.student_id, 
             ss.entry_time, 
-            ss.exit_time, 
             ss.purpose, 
-            ss.duration_minutes,
-            ss.created_at,
+            ss.lab,
             s.first_name,
             s.last_name,
             s.id_number,
@@ -39,10 +37,8 @@ if ($filter_student) {
             ss.id, 
             ss.student_id, 
             ss.entry_time, 
-            ss.exit_time, 
             ss.purpose, 
-            ss.duration_minutes,
-            ss.created_at,
+            ss.lab,
             s.first_name,
             s.last_name,
             s.id_number,
@@ -117,15 +113,14 @@ $sitin_records = $stmt->fetchAll();
                         <th class="px-6 py-3 text-left text-xs font-semibold text-slate-700 uppercase">ID Number</th>
                         <th class="px-6 py-3 text-left text-xs font-semibold text-slate-700 uppercase">Course</th>
                         <th class="px-6 py-3 text-left text-xs font-semibold text-slate-700 uppercase">Entry Time</th>
-                        <th class="px-6 py-3 text-left text-xs font-semibold text-slate-700 uppercase">Exit Time</th>
-                        <th class="px-6 py-3 text-left text-xs font-semibold text-slate-700 uppercase">Duration</th>
                         <th class="px-6 py-3 text-left text-xs font-semibold text-slate-700 uppercase">Purpose</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold text-slate-700 uppercase">Lab</th>
                     </tr>
                 </thead>
                 <tbody divide-y divide-slate-200">
                     <?php if (empty($sitin_records)): ?>
                         <tr>
-                            <td colspan="7" class="px-6 py-8 text-center text-slate-500">
+                            <td colspan="6" class="px-6 py-8 text-center text-slate-500">
                                 No sit-in records found
                             </td>
                         </tr>
@@ -144,23 +139,11 @@ $sitin_records = $stmt->fetchAll();
                                 <td class="px-6 py-4 text-sm text-slate-700">
                                     <?= date('M d, Y H:i', strtotime($record['entry_time'])) ?>
                                 </td>
-                                <td class="px-6 py-4 text-sm text-slate-700">
-                                    <?= $record['exit_time'] ? date('M d, Y H:i', strtotime($record['exit_time'])) : '—' ?>
-                                </td>
-                                <td class="px-6 py-4 text-slate-700">
-                                    <?php if ($record['duration_minutes']): ?>
-                                        <?php 
-                                            $hours = floor($record['duration_minutes'] / 60);
-                                            $mins = $record['duration_minutes'] % 60;
-                                            echo $hours > 0 ? $hours . 'h ' : '';
-                                            echo $mins . 'm';
-                                        ?>
-                                    <?php else: ?>
-                                        —
-                                    <?php endif; ?>
-                                </td>
                                 <td class="px-6 py-4 text-slate-700">
                                     <?= htmlspecialchars($record['purpose'] ?? '—') ?>
+                                </td>
+                                <td class="px-6 py-4 text-slate-700">
+                                    <?= htmlspecialchars($record['lab'] ?? '—') ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

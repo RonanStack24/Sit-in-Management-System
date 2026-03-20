@@ -131,6 +131,7 @@ if (isset($_GET['toast'])) {
     <title>My Profile | CCS Sit-in Monitoring</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="js/utils.js"></script>
 </head>
 <body class="bg-slate-50 text-slate-800 font-[Inter]">
 
@@ -364,33 +365,13 @@ if (isset($_GET['toast'])) {
     <span id="toast-msg"></span>
 </div>
 
-<script>
-function showToast(msg, type = 'success') {
-    const toast = document.getElementById('toast');
-    const toastMsg = document.getElementById('toast-msg');
-    
-    toastMsg.textContent = msg;
-    
-    if (type === 'success') {
-        toast.className = 'fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-green-500 text-white px-5 py-3 rounded-xl shadow-lg font-semibold text-sm';
-    } else {
-        toast.className = 'fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-red-500 text-white px-5 py-3 rounded-xl shadow-lg font-semibold text-sm';
-    }
-    
-    toast.classList.add('flex');
-    toast.classList.remove('hidden');
-    
-    setTimeout(() => {
-        toast.classList.add('hidden');
-        toast.classList.remove('flex');
-    }, 3500);
-}
-
-// Show toast on page load if needed
 <?php if ($toast_message): ?>
-    showToast('<?= htmlspecialchars($toast_message, ENT_QUOTES) ?>', '<?= $toast_type ?>');
-<?php endif; ?>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    showToastWithType('<?= htmlspecialchars($toast_message, ENT_QUOTES) ?>', '<?= $toast_type ?>');
+});
 </script>
+<?php endif; ?>
 
 </body>
 </html>
