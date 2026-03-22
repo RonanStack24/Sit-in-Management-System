@@ -4,6 +4,12 @@ require 'db.php';
 
 $error   = '';
 $success = '';
+$logout_message = '';
+
+// Check for logout message
+if (isset($_GET['logout']) && $_GET['logout'] === '1') {
+    $logout_message = 'You have been logged out.';
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username'] ?? '');
@@ -209,6 +215,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <svg class="w-5 h-5 shrink-0 text-green-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
     <span id="toast-msg"></span>
 </div>
+
+<?php if ($logout_message): ?>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    showToast('<?= htmlspecialchars($logout_message, ENT_QUOTES) ?>');
+});
+</script>
+<?php endif; ?>
 
 </body>
 </html>
