@@ -71,7 +71,9 @@ $sitin_records = $stmt->fetchAll();
             <span class="font-bold text-lg">CCS Admin Dashboard</span>
             <div class="flex gap-4">
                 <a href="admin_dashboard.php" class="text-sm text-white/80 hover:text-white transition">Record Sit-in</a>
+                <a href="admin_current_sitin.php" class="text-sm text-white/80 hover:text-white transition">Current Sit-ins</a>
                 <a href="admin_history.php" class="text-sm text-white font-semibold border-b-2 border-white">View History</a>
+                <a href="admin_reports.php" class="text-sm text-white/80 hover:text-white transition">Reports</a>
             </div>
         </div>
         <a href="admin_logout.php" class="text-sm text-white/80 hover:text-white">Logout</a>

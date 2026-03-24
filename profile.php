@@ -215,7 +215,12 @@ if (isset($_GET['toast'])) {
             <!-- Remaining Sessions Card -->
             <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm mt-6">
                 <div class="text-center">
-                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-3">Sessions Remaining</p>
+                    <div class="flex items-center justify-center gap-2 mb-3">
+                        <p class="text-xs font-semibold text-slate-500 uppercase tracking-wide">Sessions Remaining</p>
+                        <button onclick="location.reload();" class="text-xs text-indigo-600 hover:text-indigo-700 font-semibold hover:underline" title="Refresh sessions count">
+                            🔄
+                        </button>
+                    </div>
                     <div class="text-5xl font-bold text-[#003366] mb-2">
                         <?= (int)($student['sessions_left'] ?? 30) ?>
                     </div>

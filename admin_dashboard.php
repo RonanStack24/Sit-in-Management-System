@@ -34,13 +34,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     $student_id = $_POST['student_id'] ?? null;
     $purpose = trim($_POST['purpose'] ?? '');
     $lab = trim($_POST['lab'] ?? '');
+    $first_name = trim($_POST['first_name'] ?? '');
+    $last_name = trim($_POST['last_name'] ?? '');
+    $course = trim($_POST['course'] ?? '');
+    $course_level = trim($_POST['course_level'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    $address = trim($_POST['address'] ?? '');
     
     if ($student_id && $purpose && $lab) {
+        // Update student information if changed
+        $stmt = $pdo->prepare('UPDATE students SET first_name = ?, last_name = ?, course = ?, course_level = ?, email = ?, address = ? WHERE id = ?');
+        $stmt->execute([$first_name, $last_name, $course, $course_level, $email, $address, $student_id]);
+        
         // Insert sit-in record
         $stmt = $pdo->prepare('INSERT INTO sitin_sessions (student_id, purpose, lab, entry_time) VALUES (?, ?, ?, NOW())');
         $stmt->execute([$student_id, $purpose, $lab]);
         
-        $message = 'Sit-in recorded successfully!';
+        $message = 'Student info updated and sit-in recorded successfully!';
         
         // Update sessions_left
         $stmt = $pdo->prepare('SELECT sessions_left FROM students WHERE id = ?');
@@ -81,7 +91,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
             <span class="font-bold text-lg">CCS Admin Dashboard</span>
             <div class="flex gap-4">
                 <a href="admin_dashboard.php" class="text-sm text-white font-semibold border-b-2 border-white">Record Sit-in</a>
+                <a href="admin_current_sitin.php" class="text-sm text-white/80 hover:text-white transition">Current Sit-ins</a>
                 <a href="admin_history.php" class="text-sm text-white/80 hover:text-white transition">View History</a>
+                <a href="admin_reports.php" class="text-sm text-white/80 hover:text-white transition">Reports</a>
             </div>
         </div>
         <a href="admin_logout.php" class="text-sm text-white/80 hover:text-white">Logout</a>
@@ -203,8 +215,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                         <input type="hidden" name="action" value="record_sitin">
                         <input type="hidden" name="student_id" value="<?= $selected_student['id'] ?>">
                         
-                        <!-- ID Number (Read-only) -->
+                        <!-- Student Info (Editable) -->
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                            <!-- ID Number (Read-only) -->
                             <div>
                                 <label class="block text-xs font-semibold text-slate-600 uppercase tracking-wide mb-2">ID Number</label>
                                 <input 
@@ -220,9 +233,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                                 <label class="block text-xs font-semibold text-slate-600 uppercase tracking-wide mb-2">Last Name</label>
                                 <input 
                                     type="text" 
+                                    name="last_name"
                                     value="<?= htmlspecialchars($selected_student['last_name']) ?>"
-                                    disabled
-                                    class="w-full px-4 py-2.5 border border-slate-300 rounded-lg bg-slate-100 text-slate-700 cursor-not-allowed"
+                                    class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#003366] focus:border-transparent transition"
                                 >
                             </div>
 
@@ -231,9 +244,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                                 <label class="block text-xs font-semibold text-slate-600 uppercase tracking-wide mb-2">First Name</label>
                                 <input 
                                     type="text" 
+                                    name="first_name"
                                     value="<?= htmlspecialchars($selected_student['first_name']) ?>"
-                                    disabled
-                                    class="w-full px-4 py-2.5 border border-slate-300 rounded-lg bg-slate-100 text-slate-700 cursor-not-allowed"
+                                    class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#003366] focus:border-transparent transition"
                                 >
                             </div>
 
@@ -244,6 +257,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                                     <svg class="w-5 h-5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></path></svg>
                                     <span class="text-lg font-bold text-[#003366]"><?= (int)($selected_student['sessions_left'] ?? 30) ?></span>
                                 </div>
+                            </div>
+                        </div>
+
+                        <!-- Additional Student Info (Editable) -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                            <!-- Course -->
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-600 uppercase tracking-wide mb-2">Course</label>
+                                <input 
+                                    type="text" 
+                                    name="course"
+                                    value="<?= htmlspecialchars($selected_student['course']) ?>"
+                                    class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#003366] focus:border-transparent transition"
+                                >
+                            </div>
+
+                            <!-- Course Level -->
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-600 uppercase tracking-wide mb-2">Year Level</label>
+                                <input 
+                                    type="text" 
+                                    name="course_level"
+                                    value="<?= htmlspecialchars($selected_student['course_level'] ?? '') ?>"
+                                    class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#003366] focus:border-transparent transition"
+                                >
+                            </div>
+
+                            <!-- Email -->
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-600 uppercase tracking-wide mb-2">Email</label>
+                                <input 
+                                    type="email" 
+                                    name="email"
+                                    value="<?= htmlspecialchars($selected_student['email']) ?>"
+                                    class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#003366] focus:border-transparent transition"
+                                >
+                            </div>
+
+                            <!-- Address -->
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-600 uppercase tracking-wide mb-2">Address</label>
+                                <input 
+                                    type="text" 
+                                    name="address"
+                                    value="<?= htmlspecialchars($selected_student['address'] ?? '') ?>"
+                                    class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#003366] focus:border-transparent transition"
+                                >
                             </div>
                         </div>
 

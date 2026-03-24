@@ -145,7 +145,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <!-- Sessions Left -->
                 <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
-                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2">Sessions Left</p>
+                    <div class="flex items-center justify-between mb-2">
+                        <p class="text-xs font-semibold text-slate-500 uppercase tracking-wide">Sessions Left</p>
+                        <button onclick="location.reload();" class="text-xs text-indigo-600 hover:text-indigo-700 font-semibold hover:underline" title="Refresh sessions count">
+                            🔄 Refresh
+                        </button>
+                    </div>
                     <p class="text-5xl font-bold text-[#003366] mb-3"><?= (int)($student['sessions_left'] ?? 30) ?></p>
                     <p class="text-sm text-slate-600">out of 30 sessions</p>
                     <div class="mt-3 w-full bg-slate-200 rounded-full h-2">
