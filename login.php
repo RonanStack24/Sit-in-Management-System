@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($admin && password_verify($password, $admin['password'])) {
                 $_SESSION['admin_id'] = $admin['id'];
                 $_SESSION['is_admin'] = true;
-                header('Location: admin_dashboard.php');
+                header('Location: admin_home.php');
                 exit;
             }
         } catch (Exception $e) {

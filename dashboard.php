@@ -21,6 +21,10 @@ if (isset($_GET['toast']) && $_GET['toast'] === 'login') {
     $toast_message = 'Welcome back, ' . htmlspecialchars($student['first_name']) . '!';
 }
 
+// Fetch latest announcements from database
+$stmt = $pdo->query('SELECT * FROM announcements ORDER BY created_at DESC LIMIT 3');
+$announcements = $stmt->fetchAll();
+
 // Handle photo upload
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'upload_photo') {
     if (isset($_FILES['profile_photo']) && $_FILES['profile_photo']['error'] === UPLOAD_ERR_OK) {
@@ -181,26 +185,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     </div>
 
     <!-- Announcements Section -->
-    <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm mb-8">
-        <h2 class="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2">
-            📢 Announcements
+    <div class="mb-8">
+        <h2 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+            📢 Latest Announcements
         </h2>
-        <div class="space-y-4">
-            <div class="border-l-4 border-[#003366] bg-blue-50 p-4 rounded">
-                <div class="flex justify-between items-start mb-2">
-                    <h4 class="font-semibold text-slate-900">No sit-ins during midterm exam week</h4>
-                    <p class="text-xs text-slate-500">2026-03-14</p>
+        <?php if (count($announcements) > 0): ?>
+        <div class="space-y-3">
+            <?php foreach ($announcements as $announcement):
+                $date = new DateTime($announcement['created_at']);
+                $formatted_date = $date->format('M d, Y');
+            ?>
+                <div class="bg-white border border-slate-200 rounded-lg shadow-sm p-4 hover:shadow-md transition border-l-4 border-l-[#003366]">
+                    <h3 class="font-bold text-slate-900 mb-1"><?= htmlspecialchars($announcement['title']) ?></h3>
+                    <p class="text-sm text-slate-600 mb-2"><?= nl2br(htmlspecialchars($announcement['content'])) ?></p>
+                    <p class="text-xs text-slate-400">Posted: <?= $formatted_date ?></p>
                 </div>
-                <p class="text-sm text-slate-600">Hello everyone, there will be no sit-ins during midterm exam week. Thanks!</p>
-            </div>
-            <div class="border-l-4 border-[#003366] bg-blue-50 p-4 rounded">
-                <div class="flex justify-between items-start mb-2">
-                    <h4 class="font-semibold text-slate-900">Welcome to the System</h4>
-                    <p class="text-xs text-slate-500">2026-03-10</p>
-                </div>
-                <p class="text-sm text-slate-600">HELLO WORLD - Welcome to the CCS Sit-in Monitoring System!</p>
-            </div>
+            <?php endforeach; ?>
         </div>
+        <?php else: ?>
+        <div class="bg-white border border-slate-200 rounded-lg shadow-sm p-8 text-center">
+            <div class="text-4xl mb-3">📭</div>
+            <p class="text-slate-600 font-semibold">No announcements yet</p>
+            <p class="text-slate-500 text-sm">Check back later for updates from the CCS Department</p>
+        </div>
+        <?php endif; ?>
     </div>
 
     <!-- Rules & Regulations Section -->

@@ -19,6 +19,14 @@
                 <!-- Logged In Navigation -->
                 <a class="text-sm <?= ($current_page == 'dashboard') ? 'font-semibold text-white border-b border-white/60 pb-0.5' : 'text-white/80 hover:text-white transition' ?>" href="dashboard.php">Dashboard</a>
                 
+                <a class="text-sm <?= ($current_page == 'announcements') ? 'font-semibold text-white border-b border-white/60 pb-0.5' : 'text-white/80 hover:text-white transition' ?>" href="announcements.php">Announcements</a>
+                
+                <a class="text-sm <?= ($current_page == 'sitin_history') ? 'font-semibold text-white border-b border-white/60 pb-0.5' : 'text-white/80 hover:text-white transition' ?>" href="sitin_history.php">Sit-in History</a>
+                
+                <a class="text-sm <?= ($current_page == 'reservation') ? 'font-semibold text-white border-b border-white/60 pb-0.5' : 'text-white/80 hover:text-white transition' ?>" href="lab_reservation.php">Lab Reservations</a>
+                
+                <a class="text-sm <?= ($current_page == 'feedback') ? 'font-semibold text-white border-b border-white/60 pb-0.5' : 'text-white/80 hover:text-white transition' ?>" href="feedback.php">Feedback</a>
+                
                 <a class="text-sm <?= ($current_page == 'profile') ? 'font-semibold text-white border-b border-white/60 pb-0.5' : 'text-white/80 hover:text-white transition' ?>" href="profile.php">My Profile</a>
                 
                 <a class="text-sm text-white/80 hover:text-white transition" href="logout.php">Logout</a>
@@ -35,7 +43,6 @@
                     </button>
                     <div class="absolute left-0 top-[140%] min-w-[180px] rounded-[10px] bg-white py-2.5 text-slate-800 shadow-[0_10px_25px_rgba(0,0,0,0.15)] opacity-0 invisible -translate-y-1.5 transition duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 z-10" role="menu">
                         <a class="block px-4 py-2.5 text-sm hover:bg-slate-100" href="events.php">Events</a>
-                        <a class="block px-4 py-2.5 text-sm hover:bg-slate-100" href="announcements.php">Announcements</a>
                         <a class="block px-4 py-2.5 text-sm hover:bg-slate-100" href="support.php">Support</a>
                     </div>
                 </div>

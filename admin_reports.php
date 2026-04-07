@@ -69,18 +69,20 @@ $record_count = count($records);
 <body class="bg-slate-50 text-slate-800 font-[Inter]">
 
 <!-- Navigation Bar -->
-<nav class="bg-[#003366] text-white shadow-sm sticky top-0 z-50">
-    <div class="px-[5%] py-4 flex items-center justify-between">
-        <div class="flex items-center gap-6">
-            <span class="font-bold text-lg">CCS Admin Dashboard</span>
-            <div class="flex gap-4">
-                <a href="admin_dashboard.php" class="text-sm text-white/80 hover:text-white transition">Record Sit-in</a>
-                <a href="admin_current_sitin.php" class="text-sm text-white/80 hover:text-white transition">Current Sit-ins</a>
-                <a href="admin_history.php" class="text-sm text-white/80 hover:text-white transition">View History</a>
-                <a href="admin_reports.php" class="text-sm text-white font-semibold border-b-2 border-white">Reports</a>
-            </div>
+<nav class="bg-[#003366] text-white shadow-lg sticky top-0 z-50">
+    <div class="px-[5%] py-4">
+        <div class="flex items-center justify-between mb-3">
+            <h1 class="font-bold text-xl">CCS Admin</h1>
+            <a href="admin_logout.php" class="text-sm bg-red-600 hover:bg-red-700 px-3 py-1.5 rounded transition">Logout</a>
         </div>
-        <a href="admin_logout.php" class="text-sm text-white/80 hover:text-white">Logout</a>
+        <div class="flex gap-2 flex-wrap">
+            <a href="admin_home.php" class="px-3 py-2 text-sm text-white/90 hover:bg-white/10 rounded transition">Home</a>
+            <a href="admin_dashboard.php" class="px-3 py-2 text-sm text-white/90 hover:bg-white/10 rounded transition">Record Sit-in</a>
+            <a href="admin_current_sitin.php" class="px-3 py-2 text-sm text-white/90 hover:bg-white/10 rounded transition">Current Sit-ins</a>
+            <a href="admin_announcements.php" class="px-3 py-2 text-sm text-white/90 hover:bg-white/10 rounded transition">Announcements</a>
+            <a href="admin_feedback.php" class="px-3 py-2 text-sm text-white/90 hover:bg-white/10 rounded transition">Feedback</a>
+            <a href="admin_reservations.php" class="px-3 py-2 text-sm text-white/90 hover:bg-white/10 rounded transition">Reservations</a>
+        </div>
     </div>
 </nav>
 
