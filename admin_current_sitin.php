@@ -63,11 +63,11 @@ $session_count = count($current_sitins);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Current Sit-ins | CCS Admin</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.6/tailwind.min.css">
     <script src="js/utils.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
 </head>
-<body class="bg-slate-50 text-slate-800 font-[Inter]">
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 font-[Inter]">
 
 <!-- Navigation Bar -->
 <nav class="bg-[#003366] text-white shadow-lg sticky top-0 z-50">

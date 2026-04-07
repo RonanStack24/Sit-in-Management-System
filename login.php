@@ -60,8 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | CCS Sit-in Monitoring</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="js/utils.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.6/tailwind.min.css">
     <style>
         /* ============================================
            PAGE ANIMATIONS
@@ -89,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .delay-1 { animation-delay: 0.1s; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-[Inter]">
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 font-[Inter]">
 
 <!-- ================================
      NAVIGATION BAR
@@ -139,6 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 type="text"
                                 placeholder="e.g. 2024-00001 (student) or admin (admin)"
                                 value="<?= htmlspecialchars($_POST['username'] ?? '') ?>"
+                                autocomplete="username"
                                 required
                                 autofocus   
                             >
@@ -156,6 +156,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 name="password"
                                 type="password"
                                 placeholder="Enter your password"
+                                autocomplete="current-password"
                                 required
                             >
                         </div>

@@ -130,10 +130,10 @@ if (isset($_GET['toast'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Profile | CCS Sit-in Monitoring</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.6/tailwind.min.css">
     <script src="js/utils.js"></script>
 </head>
-<body class="bg-slate-50 text-slate-800 font-[Inter]">
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 font-[Inter]">
 
 <?php 
     $current_page = 'profile';
@@ -266,7 +266,7 @@ if (isset($_GET['toast'])) {
                             <label class="block text-sm font-semibold text-slate-700 mb-2">
                                 Email <span class="text-red-500">*</span>
                             </label>
-                            <input type="email" name="email" value="<?= htmlspecialchars($student['email']) ?>" required class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#003366] focus:border-transparent transition">
+                            <input type="email" name="email" value="<?= htmlspecialchars($student['email']) ?>" autocomplete="email" required class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#003366] focus:border-transparent transition">
                         </div>
 
                         <!-- First Name -->

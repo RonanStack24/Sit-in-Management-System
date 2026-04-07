@@ -47,8 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register | CCS Sit-in Monitoring</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="js/utils.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.6/tailwind.min.css">
     <script src="js/app.js"></script>
     <style>
         /* ============================================
@@ -77,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .delay-1 { animation-delay: 0.1s; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-[Inter]">
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 font-[Inter]">
 
 <!-- ================================
      NAVIGATION BAR
@@ -118,22 +117,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <form action="register.php" method="post" class="grid gap-3">
                         <div>
                             <label class="text-xs font-semibold text-slate-600" for="id_number">ID Number</label>
-                            <input class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200/60" id="id_number" name="id_number" type="text" placeholder="Enter your ID" required>
+                            <input class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200/60" id="id_number" name="id_number" type="text" placeholder="Enter your ID" autocomplete="off" required>
                         </div>
 
                         <div>
                             <label class="text-xs font-semibold text-slate-600" for="last_name">Last Name</label>
-                            <input class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200/60" id="last_name" name="last_name" type="text" placeholder="Enter your last name" required>
+                            <input class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200/60" id="last_name" name="last_name" type="text" placeholder="Enter your last name" autocomplete="family-name" required>
                         </div>
 
                         <div>
                             <label class="text-xs font-semibold text-slate-600" for="first_name">First Name</label>
-                            <input class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200/60" id="first_name" name="first_name" type="text" placeholder="Enter your first name" required>
+                            <input class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200/60" id="first_name" name="first_name" type="text" placeholder="Enter your first name" autocomplete="given-name" required>
                         </div>
 
                         <div>
                             <label class="text-xs font-semibold text-slate-600" for="middle_name">Middle Name</label>
-                            <input class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200/60" id="middle_name" name="middle_name" type="text" placeholder="Enter your middle name">
+                            <input class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200/60" id="middle_name" name="middle_name" type="text" placeholder="Enter your middle name" autocomplete="additional-name">
                         </div>
 
                         <div>
@@ -148,22 +147,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                         <div>
                             <label class="text-xs font-semibold text-slate-600" for="email">Email</label>
-                            <input class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200/60" id="email" name="email" type="email" placeholder="name@example.com" required>
+                            <input class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200/60" id="email" name="email" type="email" placeholder="name@example.com" autocomplete="email" required>
                         </div>
 
                         <div>
                             <label class="text-xs font-semibold text-slate-600" for="password">Password</label>
-                            <input class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200/60" id="password" name="password" type="password" placeholder="Create a password" required>
+                            <input class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200/60" id="password" name="password" type="password" placeholder="Create a password" autocomplete="new-password" required>
                         </div>
 
                         <div>
                             <label class="text-xs font-semibold text-slate-600" for="confirm_password">Repeat your password</label>
-                            <input class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200/60" id="confirm_password" name="confirm_password" type="password" placeholder="Repeat your password" required>
+                            <input class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200/60" id="confirm_password" name="confirm_password" type="password" placeholder="Repeat your password" autocomplete="new-password" required>
                         </div>
 
                         <div>
                             <label class="text-xs font-semibold text-slate-600" for="address">Address</label>
-                            <input class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200/60" id="address" name="address" type="text" placeholder="Street, City, Province" required>
+                            <input class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200/60" id="address" name="address" type="text" placeholder="Street, City, Province" autocomplete="street-address" required>
                         </div>
 
                         <button class="mt-2 inline-flex items-center rounded-lg bg-[#003366] px-6 py-2.5 text-sm font-semibold text-white hover:bg-[#004b93] transition" type="submit">Register</button>

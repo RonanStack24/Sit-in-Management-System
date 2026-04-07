@@ -23,7 +23,7 @@ $user_name = $_SESSION['first_name'] ?? 'User';
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="js/utils.js"></script>
 </head>
-<body class="bg-slate-50 text-slate-800 font-[Inter]">
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 font-[Inter]">
 
 <div class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
     <div class="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full mx-4">
