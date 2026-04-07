@@ -239,9 +239,8 @@ header('Content-Type: text/html; charset=utf-8');
     <div id="report-content">
         <div class="page">
             <div class="header">
-                <h1>📊 CCS SIT-IN MANAGEMENT SYSTEM</h1>
-                <p>Attendance Report</p>
-                <div class="institution">University of Cebu - College of Computer Studies</div>
+                <h1>CCS | Home</h1>
+                <p>Sit-in Management System Report</p>
             </div>
 
             <div class="meta">
@@ -261,10 +260,11 @@ header('Content-Type: text/html; charset=utf-8');
                     <thead>
                         <tr>
                             <th>ID Number</th>
-                            <th>Student Name</th>
+                            <th>Name</th>
                             <th>Purpose</th>
                             <th>Laboratory</th>
-                            <th>Login Time</th>
+                            <th>Login</th>
+                            <th>Logout</th>
                             <th>Date</th>
                         </tr>
                     </thead>
@@ -272,8 +272,8 @@ header('Content-Type: text/html; charset=utf-8');
                         <?php if (!empty($records)): ?>
                             <?php foreach ($records as $record): 
                                 $entry_time = new DateTime($record['entry_time']);
-                                $login = $entry_time->format('h:i A');
-                                $date = $entry_time->format('M d, Y');
+                                $login = $entry_time->format('h:i:sa');
+                                $date = $entry_time->format('Y-m-d');
                             ?>
                                 <tr>
                                     <td><?= htmlspecialchars($record['id_number']) ?></td>
@@ -281,12 +281,13 @@ header('Content-Type: text/html; charset=utf-8');
                                     <td><?= htmlspecialchars($record['purpose']) ?></td>
                                     <td><?= htmlspecialchars($record['lab']) ?></td>
                                     <td><?= $login ?></td>
+                                    <td>-</td>
                                     <td><?= $date ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         <?php else: ?>
                             <tr>
-                                <td colspan="6" class="no-records">📭 No records found for the specified period</td>
+                                <td colspan="7" class="no-records">📭 No records found for the specified period</td>
                             </tr>
                         <?php endif; ?>
                     </tbody>
