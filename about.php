@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -23,7 +23,7 @@
         .anim-fade   { animation: fadeIn  0.6s ease both; }
         .anim-slide  { animation: slideUp 0.5s ease both; }
 
-        /* Stagger delays — each card starts a bit later */
+        /* Stagger delays � each card starts a bit later */
         .delay-1 { animation-delay: 0.05s; }
         .delay-2 { animation-delay: 0.15s; }
         .delay-3 { animation-delay: 0.25s; }
@@ -57,12 +57,12 @@
     </div>
 
     <!-- What is it -->
-    <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 sm:p-8 shadow-sm dark:shadow-lg mb-6 anim-slide delay-1 hover:shadow-md dark:hover:shadow-md hover:-translate-y-1 transition-all duration-200">
+    <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm mb-6 anim-slide delay-1 hover:shadow-md hover:-translate-y-1 transition-all duration-200">
         <div class="flex items-center gap-3 mb-3">
-            <span class="text-2xl">📋</span>
-            <h2 class="text-lg font-bold text-slate-900 dark:text-white">What is this system?</h2>
+            <span class="text-2xl">??</span>
+            <h2 class="text-lg font-bold text-slate-900">What is this system?</h2>
         </div>
-        <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+        <p class="text-sm text-slate-600 leading-relaxed">
             The <strong>CCS Sit-in Monitoring System</strong> is a web-based tool for the College of Computer Studies at the
             University of Cebu. It lets students log and track their laboratory sit-in sessions, while giving administrators
             a clear view of lab activity and occupancy in real time.
@@ -70,12 +70,12 @@
     </div>
 
     <!-- Why it exists -->
-    <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 sm:p-8 shadow-sm dark:shadow-lg mb-6 anim-slide delay-2 hover:shadow-md dark:hover:shadow-md hover:-translate-y-1 transition-all duration-200">
+    <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm mb-6 anim-slide delay-2 hover:shadow-md hover:-translate-y-1 transition-all duration-200">
         <div class="flex items-center gap-3 mb-3">
-            <span class="text-2xl">💡</span>
-            <h2 class="text-lg font-bold text-slate-900 dark:text-white">Why was it built?</h2>
+            <span class="text-2xl">??</span>
+            <h2 class="text-lg font-bold text-slate-900">Why was it built?</h2>
         </div>
-        <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+        <p class="text-sm text-slate-600 leading-relaxed">
             Before this system, sit-in monitoring was done manually paper logs were error prone and hard to review.
             This system replaces that process with a fast, organized, and paperless workflow that benefits both students
             and lab administrators.
@@ -83,34 +83,34 @@
     </div>
 
     <!-- Features -->
-    <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 sm:p-8 shadow-sm dark:shadow-lg mb-6 anim-slide delay-3 hover:shadow-md dark:hover:shadow-md hover:-translate-y-1 transition-all duration-200">
+    <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm mb-6 anim-slide delay-3 hover:shadow-md hover:-translate-y-1 transition-all duration-200">
         <div class="flex items-center gap-3 mb-4">
-            <span class="text-2xl">⚙️</span>
-            <h2 class="text-lg font-bold text-slate-900 dark:text-white">Key Features</h2>
+            <span class="text-2xl">??</span>
+            <h2 class="text-lg font-bold text-slate-900">Key Features</h2>
         </div>
         <ul class="grid sm:grid-cols-2 gap-3">
-            <li class="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-300">
-                <span class="mt-0.5 text-green-500 font-bold">✔</span>
+            <li class="flex items-start gap-2 text-sm text-slate-600">
+                <span class="mt-0.5 text-green-500 font-bold">?</span>
                 Student registration and login
             </li>
-            <li class="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-300">
-                <span class="mt-0.5 text-green-500 font-bold">✔</span>
+            <li class="flex items-start gap-2 text-sm text-slate-600">
+                <span class="mt-0.5 text-green-500 font-bold">?</span>
                 Sit-in session logging and history
             </li>
-            <li class="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-300">
-                <span class="mt-0.5 text-green-500 font-bold">✔</span>
+            <li class="flex items-start gap-2 text-sm text-slate-600">
+                <span class="mt-0.5 text-green-500 font-bold">?</span>
                 Remaining session tracking (max 30)
             </li>
-            <li class="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-300">
-                <span class="mt-0.5 text-green-500 font-bold">✔</span>
+            <li class="flex items-start gap-2 text-sm text-slate-600">
+                <span class="mt-0.5 text-green-500 font-bold">?</span>
                 Lab availability and seat monitoring
             </li>
-            <li class="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-300">
-                <span class="mt-0.5 text-green-500 font-bold">✔</span>
+            <li class="flex items-start gap-2 text-sm text-slate-600">
+                <span class="mt-0.5 text-green-500 font-bold">?</span>
                 Admin dashboard with live occupancy
             </li>
-            <li class="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-300">
-                <span class="mt-0.5 text-green-500 font-bold">✔</span>
+            <li class="flex items-start gap-2 text-sm text-slate-600">
+                <span class="mt-0.5 text-green-500 font-bold">?</span>
                 Announcements and community notices
             </li>
         </ul>
@@ -119,14 +119,14 @@
     <!-- Who uses it -->
     <div class="grid sm:grid-cols-2 gap-6 mb-6">
         <div class="bg-[#003366] text-white rounded-2xl p-6 shadow-sm anim-slide delay-4 hover:shadow-lg hover:-translate-y-1 transition-all duration-200">
-            <div class="text-2xl mb-2">👤</div>
+            <div class="text-2xl mb-2">??</div>
             <h3 class="font-bold text-base mb-1">For Students</h3>
             <p class="text-sm text-white/75 leading-relaxed">
                 Register, log in, reserve a lab seat, view your remaining sit-in sessions, and check your history all in one place.
             </p>
         </div>
-        <div class="bg-slate-800 text-white rounded-2xl p-6 shadow-sm anim-slide delay-5 hover:shadow-lg hover:-translate-y-1 transition-all duration-200">
-            <div class="text-2xl mb-2">🛡️</div>
+        <div class=\"bg-slate-100 text-slate-900 rounded-2xl p-6 shadow-sm anim-slide delay-5 hover:shadow-lg hover:-translate-y-1 transition-all duration-200\">
+            <div class="text-2xl mb-2">???</div>
             <h3 class="font-bold text-base mb-1">For Administrators</h3>
             <p class="text-sm text-white/75 leading-relaxed">
                 Monitor live lab occupancy, approve or deny requests, manage student records, and generate attendance reports.
@@ -135,10 +135,10 @@
     </div>
 
     <!-- School info -->
-    <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 sm:p-8 shadow-sm dark:shadow-lg text-center anim-slide delay-6 hover:shadow-md dark:hover:shadow-md hover:-translate-y-1 transition-all duration-200">
-        <p class="text-xs text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-1">Developed by</p>
-        <h3 class="text-base font-bold text-slate-900 dark:text-white">RONAN ANTOQUE</h3>
-        <p class="text-sm text-slate-500 dark:text-slate-400">College of Computer Studies - University of Cebu</p>
+    <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm text-center anim-slide delay-6 hover:shadow-md hover:-translate-y-1 transition-all duration-200">
+        <p class="text-xs text-slate-400 uppercase tracking-widest mb-1">Developed by</p>
+        <h3 class="text-base font-bold text-slate-900">RONAN ANTOQUE</h3>
+        <p class="text-sm text-slate-500">College of Computer Studies - University of Cebu</p>
         <div class="mt-4 flex justify-center gap-4">
             <a href="login.php" class="px-5 py-2 rounded-lg bg-[#003366] text-white text-sm font-semibold hover:bg-[#004b93] transition">
                 Student Login
