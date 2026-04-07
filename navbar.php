@@ -2,12 +2,12 @@
     <div class="px-[5%] py-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         
         <div class="flex items-center gap-3">
-            <a class="flex items-center gap-2.5 font-bold text-[1.2rem] text-white" href="index.php">
+            <div class="flex items-center gap-2.5 font-bold text-[1.2rem] text-white">
                 <span class="inline-flex items-center rounded-full bg-white/90 p-1">
                     <img class="w-9 h-9 object-contain" src="ccs-logo.png" alt="CCS logo">
                 </span>
                 <span>CCS Sit-in System</span>
-            </a>
+            </div>
             <span class="inline-flex items-center rounded-full bg-white/90 px-2.5 py-1">
                 <img class="h-[26px] w-auto block" src="uc-logo.png" alt="University of Cebu logo">
             </span>

@@ -136,9 +136,9 @@
 
     <!-- School info -->
     <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm text-center anim-slide delay-6 hover:shadow-md hover:-translate-y-1 transition-all duration-200">
-        <p class="text-xs text-slate-400 uppercase tracking-widest mb-1">Developed for</p>
-        <h3 class="text-base font-bold text-slate-900">College of Computer Studies</h3>
-        <p class="text-sm text-slate-500">University of Cebu</p>
+        <p class="text-xs text-slate-400 uppercase tracking-widest mb-1">Developed by</p>
+        <h3 class="text-base font-bold text-slate-900">RONAN ANTOQUE</h3>
+        <p class="text-sm text-slate-500">College of Computer Studies - University of Cebu</p>
         <div class="mt-4 flex justify-center gap-4">
             <a href="login.php" class="px-5 py-2 rounded-lg bg-[#003366] text-white text-sm font-semibold hover:bg-[#004b93] transition">
                 Student Login
