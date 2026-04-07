@@ -128,7 +128,7 @@
         <div class=\"bg-slate-100 text-slate-900 rounded-2xl p-6 shadow-sm anim-slide delay-5 hover:shadow-lg hover:-translate-y-1 transition-all duration-200\">
             <div class="text-2xl mb-2">🛡️</div>
             <h3 class="font-bold text-base mb-1">For Administrators</h3>
-            <p class="text-sm text-white/75 leading-relaxed">
+            <p class="text-sm text-slate-600 leading-relaxed">
                 Monitor live lab occupancy, approve or deny requests, manage student records, and generate attendance reports.
             </p>
         </div>
