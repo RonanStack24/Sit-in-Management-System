@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About | CCS Sit-in Monitoring</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.6/tailwind.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* fade-in: just fades from invisible to visible */
         @keyframes fadeIn {
@@ -32,7 +32,7 @@
         .delay-6 { animation-delay: 0.55s; }
     </style>
 </head>
-<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 font-[Inter]">
+<body class="bg-slate-50 text-slate-800 font-[Inter]">
 
 <!-- ================================
      NAVIGATION BAR

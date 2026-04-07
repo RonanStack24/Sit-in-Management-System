@@ -66,7 +66,7 @@ $record_count = count($records);
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.6/tailwind.min.css">
     <script src="js/utils.js"></script>
 </head>
-<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 font-[Inter]">
+<body class="bg-slate-50 text-slate-800 font-[Inter]">
 
 <!-- Navigation Bar -->
 <nav class="bg-[#003366] text-white shadow-lg sticky top-0 z-50">

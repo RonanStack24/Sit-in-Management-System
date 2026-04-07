@@ -42,7 +42,7 @@ foreach ($all_feedback as $fb) {
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
 </head>
-<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 font-[Inter]">
+<body class="bg-slate-50 text-slate-800 font-[Inter]">
 
 <!-- Navigation Bar -->
 <nav class="bg-[#003366] text-white shadow-lg sticky top-0 z-50">
