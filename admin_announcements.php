@@ -95,6 +95,7 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
             <a href="admin_feedback.php" class="px-3 py-2 text-sm text-white/90 hover:bg-white/10 rounded transition">Feedback</a>
             <a href="admin_reservations.php" class="px-3 py-2 text-sm text-white/90 hover:bg-white/10 rounded transition">Reservations</a>
             <a href="admin_reports.php" class="px-3 py-2 text-sm text-white/90 hover:bg-white/10 rounded transition">Reports</a>
+            <a href="admin_students.php" class="px-3 py-2 text-sm text-white/90 hover:bg-white/10 rounded transition">Students</a>
         </div>
     </div>
 </nav>
