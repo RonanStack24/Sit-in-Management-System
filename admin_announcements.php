@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'db.php';
+require 'notification_helper.php';
 
 // Check if user is admin
 if (!isset($_SESSION['admin_id']) || !isset($_SESSION['is_admin'])) {
@@ -44,7 +45,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                 // Create new announcement
                 $stmt = $pdo->prepare('INSERT INTO announcements (title, content) VALUES (?, ?)');
                 $stmt->execute([$title, $content]);
-                $message = 'Announcement created successfully!';
+                
+                // Get the ID of the newly created announcement
+                $announcement_id = $pdo->lastInsertId();
+                
+                // Notify all students about the new announcement
+                notifyAllStudents($pdo, 'Announcement', '📢 New Announcement', htmlspecialchars($title), $announcement_id);
+                
+                $message = 'Announcement created successfully! All students have been notified.';
             }
             $action = '';
         } catch (Exception $e) {

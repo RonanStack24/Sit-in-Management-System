@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'db.php';
+require 'notification_helper.php';
 
 // Check if user is admin
 if (!isset($_SESSION['admin_id']) || !isset($_SESSION['is_admin'])) {
@@ -18,9 +19,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     if ($action === 'approve' || $action === 'reject') {
         $status = $action === 'approve' ? 'Approved' : 'Rejected';
         try {
-            $stmt = $pdo->prepare('UPDATE lab_reservations SET status = ? WHERE id = ?');
-            $stmt->execute([$status, $id]);
-            $message = 'Reservation ' . strtolower($status) . ' successfully!';
+            // Get the student_id before updating
+            $stmt = $pdo->prepare('SELECT student_id FROM lab_reservations WHERE id = ?');
+            $stmt->execute([$id]);
+            $reservation = $stmt->fetch();
+            
+            if ($reservation) {
+                $student_id = $reservation['student_id'];
+                
+                // Update reservation status
+                $stmt = $pdo->prepare('UPDATE lab_reservations SET status = ? WHERE id = ?');
+                $stmt->execute([$status, $id]);
+                
+                // Create notification for the student
+                notifyReservationStatus($pdo, $id, $student_id, $status);
+                
+                $message = 'Reservation ' . strtolower($status) . ' successfully! Student has been notified.';
+            } else {
+                $message = 'Error: Reservation not found.';
+            }
         } catch (Exception $e) {
             $message = 'Error updating reservation: ' . $e->getMessage();
         }

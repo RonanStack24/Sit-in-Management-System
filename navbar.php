@@ -19,6 +19,21 @@
                 <!-- Logged In Navigation -->
                 <a class="text-sm <?= ($current_page == 'dashboard') ? 'font-semibold text-white border-b border-white/60 pb-0.5' : 'text-white/80 hover:text-white transition' ?>" href="dashboard.php">Dashboard</a>
                 
+                <a class="text-sm <?= ($current_page == 'notifications') ? 'font-semibold text-white border-b border-white/60 pb-0.5' : 'text-white/80 hover:text-white transition' ?>" href="notifications.php" style="position: relative;">
+                    🔔 Notifications
+                    <?php 
+                        require_once 'db.php';
+                        $stmt = $pdo->prepare('SELECT COUNT(*) as count FROM notifications WHERE student_id = ? AND is_read = FALSE');
+                        $stmt->execute([$_SESSION['user_id']]);
+                        $unread = $stmt->fetch()['count'];
+                        if ($unread > 0): 
+                    ?>
+                        <span class="inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-red-600 rounded-full" style="position: absolute; top: -8px; right: -12px;">
+                            <?= min($unread, 9) ?><?= $unread > 9 ? '+' : '' ?>
+                        </span>
+                    <?php endif; ?>
+                </a>
+                
                 <a class="text-sm <?= ($current_page == 'announcements') ? 'font-semibold text-white border-b border-white/60 pb-0.5' : 'text-white/80 hover:text-white transition' ?>" href="announcements.php">Announcements</a>
                 
                 <a class="text-sm <?= ($current_page == 'sitin_history') ? 'font-semibold text-white border-b border-white/60 pb-0.5' : 'text-white/80 hover:text-white transition' ?>" href="sitin_history.php">Sit-in History</a>
