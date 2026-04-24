@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'db.php';
+require 'admin_notification_helper.php';
 
 // Redirect to login if not logged in
 if (!isset($_SESSION['user_id'])) {
@@ -29,6 +30,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         try {
             $stmt = $pdo->prepare('INSERT INTO feedback (student_id, category, rating, comment) VALUES (?, ?, ?, ?)');
             $stmt->execute([$user_id, $category, $rating, $comment]);
+            
+            // Get the feedback ID
+            $feedback_id = $pdo->lastInsertId();
+            
+            // Notify all admins about new feedback
+            $student_name = htmlspecialchars($student['first_name'] . ' ' . $student['last_name']);
+            notifyNewFeedback($pdo, $feedback_id, $student_name, $category, $rating);
+            
             $message = 'Thank you! Your feedback has been submitted successfully.';
             $success = true;
         } catch (Exception $e) {

@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'db.php';
+require 'admin_notification_helper.php';
 
 // Redirect to login if not logged in
 if (!isset($_SESSION['user_id'])) {
@@ -36,6 +37,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                 VALUES (?, ?, ?, ?, ?, ?, ?)
             ');
             $stmt->execute([$user_id, $lab_name, $reservation_date, $start_time, $end_time, $purpose, 'Pending']);
+            
+            // Get the reservation ID
+            $reservation_id = $pdo->lastInsertId();
+            
+            // Notify all admins about new reservation
+            $student_name = htmlspecialchars($student['first_name'] . ' ' . $student['last_name']);
+            notifyNewReservation($pdo, $reservation_id, $student_name, $lab_name, $reservation_date, $start_time);
+            
             $message = 'Reservation request submitted successfully!';
             $success = true;
         } catch (PDOException $e) {

@@ -105,6 +105,7 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
             <a href="admin_reservations.php" class="px-3 py-2 text-sm text-white/90 hover:bg-white/10 rounded transition">Reservations</a>
             <a href="admin_reports.php" class="px-3 py-2 text-sm text-white/90 hover:bg-white/10 rounded transition">Reports</a>
             <a href="admin_students.php" class="px-3 py-2 text-sm text-white/90 hover:bg-white/10 rounded transition">Students</a>
+            <a href="admin_notifications.php" class="px-3 py-2 text-sm text-white/90 hover:bg-white/10 rounded transition" style="position: relative;">🔔 Notifications <?php $stmt = $pdo->prepare('SELECT COUNT(*) as count FROM admin_notifications WHERE admin_id = ? AND is_read = FALSE'); $stmt->execute([$_SESSION['admin_id']]); $unread = $stmt->fetch()['count']; if ($unread > 0): ?><span class="inline-flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-red-600 rounded-full" style="position: absolute; top: -5px; right: -8px;"><?= min($unread, 9) ?><?= $unread > 9 ? '+' : '' ?></span><?php endif; ?></a>
         </div>
     </div>
 </nav>
