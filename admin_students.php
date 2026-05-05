@@ -235,3 +235,4 @@ $avg_sessions = $pdo->query('SELECT AVG(sessions_left) as avg FROM students')->f
 
 </body>
 </html>
+

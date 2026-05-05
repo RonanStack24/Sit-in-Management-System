@@ -8,6 +8,8 @@ if (!isset($_SESSION['admin_id']) || !isset($_SESSION['is_admin'])) {
     exit;
 }
 
+$current_page = 'admin_current_sitin';
+
 $logout_message = '';
 
 // Handle logout user
@@ -69,27 +71,7 @@ $session_count = count($current_sitins);
 </head>
 <body class="bg-slate-50 text-slate-800 font-[Inter]">
 
-<!-- Navigation Bar -->
-<nav class="bg-[#003366] text-white shadow-lg sticky top-0 z-50">
-    <div class="px-[5%] py-4">
-        <div class="flex items-center justify-between mb-3">
-            <h1 class="font-bold text-xl">CCS Admin</h1>
-            <a href="admin_logout.php" class="text-sm bg-red-600 hover:bg-red-700 px-3 py-1.5 rounded transition">Logout</a>
-        </div>
-        <div class="flex gap-2 flex-wrap">
-            <a href="admin_home.php" class="px-3 py-2 text-sm text-white/90 hover:bg-white/10 rounded transition">Home</a>
-            <a href="admin_dashboard.php" class="px-3 py-2 text-sm text-white/90 hover:bg-white/10 rounded transition">Record Sit-in</a>
-            <a href="admin_current_sitin.php" class="px-3 py-2 text-sm font-semibold bg-white/20 rounded hover:bg-white/30 transition border-b-2 border-white">Current Sit-ins</a>
-            <a href="admin_history.php" class="px-3 py-2 text-sm text-white/90 hover:bg-white/10 rounded transition">Sit-in History</a>
-            <a href="admin_announcements.php" class="px-3 py-2 text-sm text-white/90 hover:bg-white/10 rounded transition">Announcements</a>
-            <a href="admin_feedback.php" class="px-3 py-2 text-sm text-white/90 hover:bg-white/10 rounded transition">Feedback</a>
-            <a href="admin_reservations.php" class="px-3 py-2 text-sm text-white/90 hover:bg-white/10 rounded transition">Reservations</a>
-            <a href="admin_reports.php" class="px-3 py-2 text-sm text-white/90 hover:bg-white/10 rounded transition">Reports</a>
-            <a href="admin_students.php" class="px-3 py-2 text-sm text-white/90 hover:bg-white/10 rounded transition">Students</a>
-            <a href="admin_notifications.php" class="px-3 py-2 text-sm text-white/90 hover:bg-white/10 rounded transition" style="position: relative;">🔔 Notifications <?php $stmt = $pdo->prepare('SELECT COUNT(*) as count FROM admin_notifications WHERE admin_id = ? AND is_read = FALSE'); $stmt->execute([$_SESSION['admin_id']]); $unread = $stmt->fetch()['count']; if ($unread > 0): ?><span class="inline-flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-red-600 rounded-full" style="position: absolute; top: -5px; right: -8px;"><?= min($unread, 9) ?><?= $unread > 9 ? '+' : '' ?></span><?php endif; ?></a>
-        </div>
-    </div>
-</nav>
+<?php include 'admin_navbar.php'; ?>
 
 <main class="max-w-full mx-auto px-5 py-10">
     <!-- Page Title -->
