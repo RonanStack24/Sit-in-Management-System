@@ -97,6 +97,13 @@ $sitins = $stmt->fetchAll();
         </div>
     </div>
 
+    <!-- Summary Link Button -->
+    <div class="mb-8">
+        <a href="sitin_summary.php" class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#003366] text-white font-semibold rounded-lg hover:bg-[#004b93] transition">
+            📊 View Detailed Summary
+        </a>
+    </div>
+
     <!-- History Table -->
     <div class="bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden">
         <div class="p-6 border-b border-slate-200">

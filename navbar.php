@@ -38,6 +38,8 @@
                 
                 <a class="text-sm <?= ($current_page == 'sitin_history') ? 'font-semibold text-white border-b border-white/60 pb-0.5' : 'text-white/80 hover:text-white transition' ?>" href="sitin_history.php">Sit-in History</a>
                 
+                <a class="text-sm <?= ($current_page == 'sitin_summary') ? 'font-semibold text-white border-b border-white/60 pb-0.5' : 'text-white/80 hover:text-white transition' ?>" href="sitin_summary.php">📊 Summary</a>
+                
                 <a class="text-sm <?= ($current_page == 'reservation') ? 'font-semibold text-white border-b border-white/60 pb-0.5' : 'text-white/80 hover:text-white transition' ?>" href="lab_reservation.php">Lab Reservations</a>
                 
                 <a class="text-sm <?= ($current_page == 'feedback') ? 'font-semibold text-white border-b border-white/60 pb-0.5' : 'text-white/80 hover:text-white transition' ?>" href="feedback.php">Feedback</a>
