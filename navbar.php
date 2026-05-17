@@ -75,7 +75,7 @@ $navLinkClass = function($page, $current) {
             <?php else: ?>
                 <!-- Guest Navigation -->
                 <a class="hidden sm:inline text-sm <?= $navLinkClass('home', $current_page) ?>" href="index.php">Home</a>
-                <a class="hidden sm:inline text-sm <?= $navLinkClass('leaderboards', $current_page) ?>" href="leaderboards.php">🏆 Leaderboards</a>
+                <a class="hidden sm:inline text-sm <?= $navLinkClass('leaderboards', $current_page) ?> transition-all duration-300 hover:scale-110 hover:drop-shadow-md" href="leaderboards.php">Leaderboards</a>
                 <a class="hidden sm:inline text-sm <?= $navLinkClass('about', $current_page) ?>" href="about.php">About</a>
                 <a class="<?= $navLinkClass('login', $current_page) ?>" href="login.php">Login</a>
                 <a class="<?= $navLinkClass('register', $current_page) ?>" href="register.php">Register</a>
