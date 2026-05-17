@@ -81,15 +81,87 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             to   { opacity: 1; transform: translateY(0); }
         }
 
+        /* Loading spinner animation */
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
         /* Use .anim-fade for a simple fade, .anim-slide for slide + fade */
         .anim-fade  { animation: fadeIn  0.6s ease both; }
         .anim-slide { animation: slideUp 0.55s ease both; }
 
         /* Delay class — card starts animating slightly after the page loads */
         .delay-1 { animation-delay: 0.1s; }
+
+        /* Loading screen styles */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 51, 102, 0.95) 0%, rgba(0, 75, 147, 0.95) 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .loading-screen.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        .loading-text {
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+
+        .loading-dots {
+            display: inline-block;
+            width: 4px;
+        }
+
+        .loading-dots::after {
+            content: '...';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: ''; }
+            40% { content: '.'; }
+            60% { content: '..'; }
+            80%, 100% { content: '...'; }
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-[Inter]">
+
+<!-- Loading Screen -->
+<div id="loadingScreen" class="loading-screen">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">
+        Signing you in<span class="loading-dots"></span>
+    </div>
+</div>
 
 <!-- ================================
      NAVIGATION BAR
@@ -225,6 +297,20 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 <?php endif; ?>
+
+<script>
+// Show loading screen on form submission
+document.addEventListener('DOMContentLoaded', function () {
+    const loginForm = document.querySelector('form[action="login.php"]');
+    const loadingScreen = document.getElementById('loadingScreen');
+    
+    if (loginForm && loadingScreen) {
+        loginForm.addEventListener('submit', function () {
+            loadingScreen.classList.add('active');
+        });
+    }
+});
+</script>
 
 </body>
 </html>
