@@ -29,9 +29,9 @@ $navLinkClass = function($page, $current) {
             
             <?php if (isset($_SESSION['user_id'])): ?>
                 <!-- Student Navigation - Minimal View -->
-                <a class="<?= $navLinkClass('dashboard', $current_page) ?>" href="dashboard.php">Dashboard</a>
+                <a class="<?= $navLinkClass('dashboard', $current_page) ?> transition-all duration-300 hover:scale-105" href="dashboard.php">Dashboard</a>
                 
-                <a class="<?= $navLinkClass('notifications', $current_page) ?> relative" href="notifications.php">
+                <a class="<?= $navLinkClass('notifications', $current_page) ?> relative transition-all duration-300 hover:scale-110" href="notifications.php">
                     🔔
                     <?php 
                         require_once 'db.php';
@@ -48,18 +48,18 @@ $navLinkClass = function($page, $current) {
 
                 <!-- More Menu Dropdown -->
                 <div class="relative" id="moreMenu">
-                    <button class="flex items-center gap-1 text-sm text-white/80 hover:text-white transition" type="button" onclick="document.getElementById('moreDropdown').classList.toggle('hidden')">
+                    <button class="flex items-center gap-1 text-sm text-white/80 hover:text-white transition-all duration-300 hover:scale-105" type="button" onclick="document.getElementById('moreDropdown').classList.toggle('hidden')">
                         ⋯ More
                     </button>
-                    <div id="moreDropdown" class="hidden absolute right-0 top-[140%] min-w-[180px] rounded-lg bg-white py-2 text-slate-800 shadow-[0_10px_25px_rgba(0,0,0,0.15)] z-10">
-                        <a class="block px-4 py-2 text-sm hover:bg-slate-100 <?= ($current_page == 'announcements') ? 'bg-blue-50 font-semibold text-[#003366]' : '' ?>" href="announcements.php">Announcements</a>
-                        <a class="block px-4 py-2 text-sm hover:bg-slate-100 <?= ($current_page == 'sitin_history') ? 'bg-blue-50 font-semibold text-[#003366]' : '' ?>" href="sitin_history.php">Sit-in History</a>
-                        <a class="block px-4 py-2 text-sm hover:bg-slate-100 <?= ($current_page == 'sitin_summary') ? 'bg-blue-50 font-semibold text-[#003366]' : '' ?>" href="sitin_summary.php">📊 Summary</a>
-                        <a class="block px-4 py-2 text-sm hover:bg-slate-100 <?= ($current_page == 'reservation') ? 'bg-blue-50 font-semibold text-[#003366]' : '' ?>" href="lab_reservation.php">Lab Reservations</a>
-                        <a class="block px-4 py-2 text-sm hover:bg-slate-100 <?= ($current_page == 'feedback') ? 'bg-blue-50 font-semibold text-[#003366]' : '' ?>" href="feedback.php">Feedback</a>
-                        <a class="block px-4 py-2 text-sm hover:bg-slate-100 <?= ($current_page == 'profile') ? 'bg-blue-50 font-semibold text-[#003366]' : '' ?>" href="profile.php">My Profile</a>
+                    <div id="moreDropdown" class="hidden absolute right-0 top-[140%] min-w-[180px] rounded-lg bg-white py-2 text-slate-800 shadow-[0_10px_25px_rgba(0,0,0,0.15)] z-10 animate-fadeIn">
+                        <a class="block px-4 py-2 text-sm hover:bg-slate-100 transition-colors duration-200 <?= ($current_page == 'announcements') ? 'bg-blue-50 font-semibold text-[#003366]' : '' ?>" href="announcements.php">Announcements</a>
+                        <a class="block px-4 py-2 text-sm hover:bg-slate-100 transition-colors duration-200 <?= ($current_page == 'sitin_history') ? 'bg-blue-50 font-semibold text-[#003366]' : '' ?>" href="sitin_history.php">Sit-in History</a>
+                        <a class="block px-4 py-2 text-sm hover:bg-slate-100 transition-colors duration-200 <?= ($current_page == 'sitin_summary') ? 'bg-blue-50 font-semibold text-[#003366]' : '' ?>" href="sitin_summary.php">📊 Summary</a>
+                        <a class="block px-4 py-2 text-sm hover:bg-slate-100 transition-colors duration-200 <?= ($current_page == 'reservation') ? 'bg-blue-50 font-semibold text-[#003366]' : '' ?>" href="lab_reservation.php">Lab Reservations</a>
+                        <a class="block px-4 py-2 text-sm hover:bg-slate-100 transition-colors duration-200 <?= ($current_page == 'feedback') ? 'bg-blue-50 font-semibold text-[#003366]' : '' ?>" href="feedback.php">Feedback</a>
+                        <a class="block px-4 py-2 text-sm hover:bg-slate-100 transition-colors duration-200 <?= ($current_page == 'profile') ? 'bg-blue-50 font-semibold text-[#003366]' : '' ?>" href="profile.php">My Profile</a>
                         <hr class="my-1">
-                        <a class="block px-4 py-2 text-sm hover:bg-red-50 text-red-600 font-semibold" href="logout.php">Logout</a>
+                        <a class="block px-4 py-2 text-sm hover:bg-red-50 transition-colors duration-200 text-red-600 font-semibold" href="logout.php">Logout</a>
                     </div>
                 </div>
 
@@ -74,10 +74,10 @@ $navLinkClass = function($page, $current) {
 
             <?php else: ?>
                 <!-- Guest Navigation -->
-                <a class="hidden sm:inline text-sm <?= $navLinkClass('home', $current_page) ?>" href="index.php">Home</a>
+                <a class="hidden sm:inline text-sm <?= $navLinkClass('home', $current_page) ?> transition-all duration-300 hover:scale-105" href="index.php">Home</a>
                 <a class="hidden sm:inline text-sm <?= $navLinkClass('leaderboards', $current_page) ?> transition-all duration-300 hover:scale-110 hover:drop-shadow-md" href="leaderboards.php">Leaderboards</a>
-                <a class="hidden sm:inline text-sm <?= $navLinkClass('about', $current_page) ?>" href="about.php">About</a>
-                <a class="<?= $navLinkClass('login', $current_page) ?>" href="login.php">Login</a>
+                <a class="hidden sm:inline text-sm <?= $navLinkClass('about', $current_page) ?> transition-all duration-300 hover:scale-105" href="about.php">About</a>
+                <a class="text-sm <?= $navLinkClass('login', $current_page) ?> transition-all duration-300 hover:scale-105" href="login.php">Login</a>
                 <a class="px-4 py-2 rounded-lg font-semibold text-white bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 transition-all duration-300 hover:shadow-lg hover:scale-105 text-sm" href="register.php">Register</a>
             <?php endif; ?>
         </div>
