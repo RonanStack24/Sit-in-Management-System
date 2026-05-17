@@ -78,7 +78,7 @@ $navLinkClass = function($page, $current) {
                 <a class="hidden sm:inline text-sm <?= $navLinkClass('leaderboards', $current_page) ?> transition-all duration-300 hover:scale-110 hover:drop-shadow-md" href="leaderboards.php">Leaderboards</a>
                 <a class="hidden sm:inline text-sm <?= $navLinkClass('about', $current_page) ?>" href="about.php">About</a>
                 <a class="<?= $navLinkClass('login', $current_page) ?>" href="login.php">Login</a>
-                <a class="<?= $navLinkClass('register', $current_page) ?>" href="register.php">Register</a>
+                <a class="px-4 py-2 rounded-lg font-semibold text-white bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 transition-all duration-300 hover:shadow-lg hover:scale-105 text-sm" href="register.php">Register</a>
             <?php endif; ?>
         </div>
     </div>
