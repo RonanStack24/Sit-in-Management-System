@@ -13,12 +13,13 @@ $stmt = $pdo->query('
         s.last_name,
         s.id_number,
         s.course,
+        s.profile_photo,
         COUNT(ss.id) as total_sessions,
         COALESCE(SUM(TIMESTAMPDIFF(MINUTE, ss.entry_time, COALESCE(ss.exit_time, NOW()))), 0) as total_minutes,
         ROUND(COALESCE(SUM(TIMESTAMPDIFF(MINUTE, ss.entry_time, COALESCE(ss.exit_time, NOW()))), 0) / 60.0, 1) as total_hours
     FROM students s
     LEFT JOIN sitin_sessions ss ON s.id = ss.student_id
-    GROUP BY s.id, s.first_name, s.last_name, s.id_number, s.course
+    GROUP BY s.id, s.first_name, s.last_name, s.id_number, s.course, s.profile_photo
     HAVING total_sessions > 0
     ORDER BY total_hours DESC
     LIMIT 50
@@ -81,6 +82,7 @@ $avg_hours = $pdo->query('SELECT ROUND(AVG(hours), 1) as avg FROM (SELECT ROUND(
                 <thead>
                     <tr class="bg-slate-50 border-b border-slate-200">
                         <th class="px-6 py-3 text-left text-xs font-semibold text-slate-700 uppercase">Rank</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold text-slate-700 uppercase">Profile</th>
                         <th class="px-6 py-3 text-left text-xs font-semibold text-slate-700 uppercase">Student</th>
                         <th class="px-6 py-3 text-left text-xs font-semibold text-slate-700 uppercase">ID Number</th>
                         <th class="px-6 py-3 text-left text-xs font-semibold text-slate-700 uppercase">Course</th>
@@ -94,6 +96,8 @@ $avg_hours = $pdo->query('SELECT ROUND(AVG(hours), 1) as avg FROM (SELECT ROUND(
                             <?php 
                                 $rank = $index + 1;
                                 $medal = $rank === 1 ? '🥇' : ($rank === 2 ? '🥈' : ($rank === 3 ? '🥉' : ''));
+                                $initials = strtoupper(substr($student['first_name'], 0, 1) . substr($student['last_name'], 0, 1));
+                                $profile_pic = !empty($student['profile_photo']) && file_exists($student['profile_photo']) ? $student['profile_photo'] : null;
                             ?>
                             <tr class="hover:bg-slate-50 transition <?= $rank <= 3 ? 'bg-slate-50' : '' ?>">
                                 <td class="px-6 py-4">
@@ -101,6 +105,15 @@ $avg_hours = $pdo->query('SELECT ROUND(AVG(hours), 1) as avg FROM (SELECT ROUND(
                                         <span class="text-lg"><?= $medal ?></span>
                                         <span class="font-semibold text-slate-900"><?= $rank ?></span>
                                     </div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <?php if ($profile_pic): ?>
+                                        <img src="<?= htmlspecialchars($profile_pic) ?>" alt="<?= htmlspecialchars($student['first_name'] . ' ' . $student['last_name']) ?>" class="w-10 h-10 rounded-full object-cover border-2 border-slate-200">
+                                    <?php else: ?>
+                                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white font-bold text-sm">
+                                            <?= $initials ?>
+                                        </div>
+                                    <?php endif; ?>
                                 </td>
                                 <td class="px-6 py-4 text-slate-900 font-semibold">
                                     <?= htmlspecialchars($student['first_name'] . ' ' . $student['last_name']) ?>
