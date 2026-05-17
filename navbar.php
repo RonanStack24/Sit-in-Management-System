@@ -15,12 +15,12 @@ $navLinkClass = function($page, $current) {
         <div class="flex items-center gap-3">
             <div class="flex items-center gap-2.5 font-bold text-[1.2rem]">
                 <span class="inline-flex items-center rounded-full bg-white/90 p-1">
-                    <img class="w-9 h-9 object-contain" src="ccs-logo.png" alt="CCS logo">
+                    <img class="w-9 h-9 object-contain" src="assets/images/ccs-logo.png" alt="CCS logo">
                 </span>
                 <span class="hidden sm:inline">CCS Sit-in System</span>
             </div>
             <span class="hidden sm:inline-flex items-center rounded-full bg-white/90 px-2.5 py-1">
-                <img class="h-[26px] w-auto" src="uc-logo.png" alt="University of Cebu logo">
+                <img class="h-[26px] w-auto" src="assets/images/uc-logo.png" alt="University of Cebu logo">
             </span>
         </div>
 

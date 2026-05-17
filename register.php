@@ -172,7 +172,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <div class="flex items-center justify-center">
                     <div class="w-full max-w-[360px] bg-slate-50 border border-slate-200 rounded-[22px] overflow-hidden">
-                        <img class="w-full h-auto block object-cover" src="register-illustration.jpg" alt="Register illustration">
+                        <img class="w-full h-auto block object-cover" src="assets/images/register-illustration.jpg" alt="Register illustration">
                     </div>
                 </div>
             </div>
