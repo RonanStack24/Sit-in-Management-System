@@ -29,10 +29,11 @@ $adminNavClass = function($page, $current) {
                 <button class="px-3 py-2 text-sm text-white/90 hover:bg-white/10 rounded transition" type="button" onclick="document.getElementById('adminMoreDropdown').classList.toggle('hidden')">
                     ⋯ More
                 </button>
-                <div id="adminMoreDropdown" class="hidden absolute left-0 top-[140%] min-w-[180px] rounded-lg bg-white py-2 text-slate-800 shadow-[0_10px_25px_rgba(0,0,0,0.15)] z-10">
+                <div id="adminMoreDropdown" class="hidden absolute left-0 top-[140%] min-w-[200px] rounded-lg bg-white py-2 text-slate-800 shadow-[0_10px_25px_rgba(0,0,0,0.15)] z-10">
                     <a href="admin_announcements.php" class="block px-4 py-2 text-sm hover:bg-slate-100 <?= ($current_page == 'admin_announcements') ? 'bg-blue-50 font-semibold text-[#003366]' : '' ?>">Announcements</a>
                     <a href="admin_feedback.php" class="block px-4 py-2 text-sm hover:bg-slate-100 <?= ($current_page == 'admin_feedback') ? 'bg-blue-50 font-semibold text-[#003366]' : '' ?>">Feedback</a>
                     <a href="admin_reservations.php" class="block px-4 py-2 text-sm hover:bg-slate-100 <?= ($current_page == 'admin_reservations') ? 'bg-blue-50 font-semibold text-[#003366]' : '' ?>">Reservations</a>
+                    <a href="admin_manage_reservations.php" class="block px-4 py-2 text-sm hover:bg-slate-100 <?= ($current_page == 'manage_reservations') ? 'bg-blue-50 font-semibold text-[#003366]' : '' ?>">Manage Access</a>
                     <a href="admin_reports.php" class="block px-4 py-2 text-sm hover:bg-slate-100 <?= ($current_page == 'admin_reports') ? 'bg-blue-50 font-semibold text-[#003366]' : '' ?>">Reports</a>
                     <a href="admin_students.php" class="block px-4 py-2 text-sm hover:bg-slate-100 <?= ($current_page == 'admin_students') ? 'bg-blue-50 font-semibold text-[#003366]' : '' ?>">Students</a>
                 </div>

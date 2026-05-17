@@ -13,10 +13,11 @@ $user_id = $_SESSION['user_id'];
 $message = '';
 $success = false;
 
-// Fetch student info
-$stmt = $pdo->prepare('SELECT first_name, last_name FROM students WHERE id = ?');
+// Fetch student info with reservation status
+$stmt = $pdo->prepare('SELECT first_name, last_name, reservations_enabled FROM students WHERE id = ?');
 $stmt->execute([$user_id]);
 $student = $stmt->fetch();
+$reservations_enabled = $student['reservations_enabled'] ?? true;
 
 // Handle new reservation request
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'request') {
@@ -129,6 +130,12 @@ $current_page = 'reservation';
             <div class="bg-white border border-slate-200 rounded-lg shadow-sm p-6 sticky top-20">
                 <h2 class="text-lg font-bold text-slate-900 mb-4">New Reservation</h2>
                 
+                <?php if (!$reservations_enabled): ?>
+                    <div class="bg-red-50 border border-red-200 rounded-lg p-4 text-red-700">
+                        <p class="font-semibold mb-1">🔒 Reservations Disabled</p>
+                        <p class="text-sm">Your reservation access has been disabled by the administration. Please contact your instructor or administrator if you believe this is a mistake.</p>
+                    </div>
+                <?php else: ?>
                 <form method="POST" class="space-y-4">
                     <input type="hidden" name="action" value="request">
 
@@ -187,6 +194,7 @@ $current_page = 'reservation';
                         Request Reservation
                     </button>
                 </form>
+                <?php endif; ?>
             </div>
         </div>
 
