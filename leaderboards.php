@@ -40,6 +40,36 @@ $avg_hours = $pdo->query('SELECT ROUND(AVG(hours), 1) as avg FROM (SELECT ROUND(
     <title>Leaderboards | CCS Sit-in System</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fadeIn {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        
+        .animate-slideUp {
+            animation: slideUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+    </style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-[Inter]">
 
@@ -47,24 +77,24 @@ $avg_hours = $pdo->query('SELECT ROUND(AVG(hours), 1) as avg FROM (SELECT ROUND(
 
 <main class="max-w-7xl mx-auto px-5 py-10">
     <!-- Page Title -->
-    <div class="mb-10">
+    <div class="mb-10 animate-fadeIn">
         <h1 class="text-4xl font-bold text-slate-900 mb-2">🏆 Leaderboards</h1>
         <p class="text-slate-600">Top students by sit-in hours and consistency</p>
     </div>
 
     <!-- Stats Banner -->
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
-        <div class="bg-white border border-slate-200 rounded-lg shadow-sm p-6">
+        <div class="bg-white border border-slate-200 rounded-lg shadow-sm p-6 animate-slideUp" style="animation-delay: 0.1s;">
             <p class="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Total Students</p>
             <p class="text-3xl font-bold text-[#003366]"><?= $total_students ?></p>
             <p class="text-sm text-slate-600 mt-2">Registered</p>
         </div>
-        <div class="bg-white border border-slate-200 rounded-lg shadow-sm p-6">
+        <div class="bg-white border border-slate-200 rounded-lg shadow-sm p-6 animate-slideUp" style="animation-delay: 0.2s;">
             <p class="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Total Sessions</p>
             <p class="text-3xl font-bold text-[#003366]"><?= $total_sessions ?></p>
             <p class="text-sm text-slate-600 mt-2">All sit-ins</p>
         </div>
-        <div class="bg-white border border-slate-200 rounded-lg shadow-sm p-6">
+        <div class="bg-white border border-slate-200 rounded-lg shadow-sm p-6 animate-slideUp" style="animation-delay: 0.3s;">
             <p class="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Average Hours</p>
             <p class="text-3xl font-bold text-[#003366]"><?= $avg_hours ?></p>
             <p class="text-sm text-slate-600 mt-2">Per student</p>
@@ -72,7 +102,7 @@ $avg_hours = $pdo->query('SELECT ROUND(AVG(hours), 1) as avg FROM (SELECT ROUND(
     </div>
 
     <!-- Top Students Table -->
-    <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
+    <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden animate-fadeIn" style="animation-delay: 0.4s;">
         <div class="px-6 py-5 border-b border-slate-200 bg-slate-50">
             <h2 class="text-lg font-bold text-slate-900">Top Students by Hours</h2>
         </div>
@@ -99,7 +129,7 @@ $avg_hours = $pdo->query('SELECT ROUND(AVG(hours), 1) as avg FROM (SELECT ROUND(
                                 $initials = strtoupper(substr($student['first_name'], 0, 1) . substr($student['last_name'], 0, 1));
                                 $profile_pic = !empty($student['profile_photo']) && file_exists($student['profile_photo']) ? $student['profile_photo'] : null;
                             ?>
-                            <tr class="hover:bg-slate-50 transition <?= $rank <= 3 ? 'bg-slate-50' : '' ?>">
+                            <tr class="hover:bg-slate-100 transition-all duration-300 animate-slideUp" style="animation-delay: <?= 0.4 + ($index * 0.05) ?>s;">
                                 <td class="px-6 py-4">
                                     <div class="flex items-center gap-2">
                                         <span class="text-lg"><?= $medal ?></span>
@@ -108,9 +138,9 @@ $avg_hours = $pdo->query('SELECT ROUND(AVG(hours), 1) as avg FROM (SELECT ROUND(
                                 </td>
                                 <td class="px-6 py-4">
                                     <?php if ($profile_pic): ?>
-                                        <img src="<?= htmlspecialchars($profile_pic) ?>" alt="<?= htmlspecialchars($student['first_name'] . ' ' . $student['last_name']) ?>" class="w-10 h-10 rounded-full object-cover border-2 border-slate-200">
+                                        <img src="<?= htmlspecialchars($profile_pic) ?>" alt="<?= htmlspecialchars($student['first_name'] . ' ' . $student['last_name']) ?>" class="w-10 h-10 rounded-full object-cover border-2 border-slate-200 transition-transform duration-300 hover:scale-110 hover:shadow-lg">
                                     <?php else: ?>
-                                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white font-bold text-sm">
+                                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white font-bold text-sm transition-transform duration-300 hover:scale-110 hover:shadow-lg">
                                             <?= $initials ?>
                                         </div>
                                     <?php endif; ?>
@@ -128,7 +158,7 @@ $avg_hours = $pdo->query('SELECT ROUND(AVG(hours), 1) as avg FROM (SELECT ROUND(
                                     <?= $student['total_sessions'] ?>
                                 </td>
                                 <td class="px-6 py-4 text-right">
-                                    <span class="px-3 py-1 rounded-full bg-blue-100 text-blue-700 font-semibold text-sm">
+                                    <span class="px-3 py-1 rounded-full bg-blue-100 text-blue-700 font-semibold text-sm transition-all duration-300 hover:bg-blue-200 hover:scale-105">
                                         <?= $student['total_hours'] ?> hrs
                                     </span>
                                 </td>
@@ -136,7 +166,7 @@ $avg_hours = $pdo->query('SELECT ROUND(AVG(hours), 1) as avg FROM (SELECT ROUND(
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="6" class="px-6 py-8 text-center text-slate-500">
+                            <td colspan="7" class="px-6 py-8 text-center text-slate-500">
                                 No sit-in records yet
                             </td>
                         </tr>
@@ -147,7 +177,7 @@ $avg_hours = $pdo->query('SELECT ROUND(AVG(hours), 1) as avg FROM (SELECT ROUND(
     </div>
 
     <!-- Info Footer -->
-    <div class="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-6">
+    <div class="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-6 animate-fadeIn" style="animation-delay: 0.8s;">
         <p class="text-sm text-slate-700">
             <span class="font-semibold">How rankings work:</span> Students are ranked based on total sit-in hours completed. Hours are calculated from entry and exit times. Leaderboards are updated in real-time as new sit-in sessions are recorded.
         </p>
