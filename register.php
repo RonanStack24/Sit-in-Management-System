@@ -35,7 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
             );
             $stmt->execute([$id_number, $last_name, $first_name, $middle_name, $course, $course_level, $email, $address, $hash]);
-            $success = 'Account created! You can now sign in.';
+            header('Location: login.php?registered=1');
+            exit;
         }
     }
 }
