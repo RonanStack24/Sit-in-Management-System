@@ -26,6 +26,31 @@ $stmt = $pdo->query('
 ');
 $top_students = $stmt->fetchAll();
 
+// Compute weighted scores for ranking
+$max_hours = 0;
+$max_sessions = 0;
+foreach ($top_students as $student) {
+    $max_hours = max($max_hours, (float) $student['total_hours']);
+    $max_sessions = max($max_sessions, (int) $student['total_sessions']);
+}
+
+foreach ($top_students as &$student) {
+    $participation_score = $max_sessions > 0 ? ($student['total_sessions'] / $max_sessions) * 100 : 0;
+    $hours_score = $max_hours > 0 ? ($student['total_hours'] / $max_hours) * 100 : 0;
+    $task_completion = min(100, $student['total_sessions'] * 5);
+
+    $student['task_completion'] = round($task_completion);
+    $student['performance_points'] = round(
+        ($participation_score * 0.5) + ($hours_score * 0.3) + ($task_completion * 0.2),
+        1
+    );
+}
+unset($student);
+
+usort($top_students, function ($a, $b) {
+    return $b['performance_points'] <=> $a['performance_points'];
+});
+
 // Fetch stats
 $total_students = $pdo->query('SELECT COUNT(*) as count FROM students')->fetch()['count'] ?? 0;
 $total_sessions = $pdo->query('SELECT COUNT(*) as count FROM sitin_sessions')->fetch()['count'] ?? 0;
@@ -78,8 +103,8 @@ $avg_hours = $pdo->query('SELECT ROUND(AVG(hours), 1) as avg FROM (SELECT ROUND(
 <main class="max-w-7xl mx-auto px-5 py-10">
     <!-- Page Title -->
     <div class="mb-10 animate-fadeIn">
-        <h1 class="text-4xl font-bold text-slate-900 mb-2">🏆 Leaderboards</h1>
-        <p class="text-slate-600">Top students by sit-in hours and consistency</p>
+        <h1 class="text-4xl font-bold text-slate-900 mb-2">Student Leaderboard</h1>
+        <p class="text-slate-600">Performance points, sit-in hours, and task completion</p>
     </div>
 
     <!-- Stats Banner -->
@@ -104,7 +129,7 @@ $avg_hours = $pdo->query('SELECT ROUND(AVG(hours), 1) as avg FROM (SELECT ROUND(
     <!-- Top Students Table -->
     <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden animate-fadeIn" style="animation-delay: 0.4s;">
         <div class="px-6 py-5 border-b border-slate-200 bg-slate-50">
-            <h2 class="text-lg font-bold text-slate-900">Top Students by Hours</h2>
+            <h2 class="text-lg font-bold text-slate-900">Top Students</h2>
         </div>
         
         <div class="overflow-x-auto">
@@ -116,8 +141,9 @@ $avg_hours = $pdo->query('SELECT ROUND(AVG(hours), 1) as avg FROM (SELECT ROUND(
                         <th class="px-6 py-3 text-left text-xs font-semibold text-slate-700 uppercase">Student</th>
                         <th class="px-6 py-3 text-left text-xs font-semibold text-slate-700 uppercase">ID Number</th>
                         <th class="px-6 py-3 text-left text-xs font-semibold text-slate-700 uppercase">Course</th>
-                        <th class="px-6 py-3 text-right text-xs font-semibold text-slate-700 uppercase">Sessions</th>
-                        <th class="px-6 py-3 text-right text-xs font-semibold text-slate-700 uppercase">Hours</th>
+                        <th class="px-6 py-3 text-right text-xs font-semibold text-slate-700 uppercase">Performance Points</th>
+                        <th class="px-6 py-3 text-right text-xs font-semibold text-slate-700 uppercase">Sit-in Hours</th>
+                        <th class="px-6 py-3 text-right text-xs font-semibold text-slate-700 uppercase">Task Completion</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-200">
@@ -128,6 +154,8 @@ $avg_hours = $pdo->query('SELECT ROUND(AVG(hours), 1) as avg FROM (SELECT ROUND(
                                 $medal = $rank === 1 ? '🥇' : ($rank === 2 ? '🥈' : ($rank === 3 ? '🥉' : ''));
                                 $initials = strtoupper(substr($student['first_name'], 0, 1) . substr($student['last_name'], 0, 1));
                                 $profile_pic = !empty($student['profile_photo']) && file_exists($student['profile_photo']) ? $student['profile_photo'] : null;
+                                $performance_points = $student['performance_points'];
+                                $task_completion = $student['task_completion'];
                             ?>
                             <tr class="hover:bg-slate-100 transition-all duration-300 animate-slideUp" style="animation-delay: <?= 0.4 + ($index * 0.05) ?>s;">
                                 <td class="px-6 py-4">
@@ -154,19 +182,24 @@ $avg_hours = $pdo->query('SELECT ROUND(AVG(hours), 1) as avg FROM (SELECT ROUND(
                                 <td class="px-6 py-4 text-slate-600">
                                     <?= htmlspecialchars($student['course']) ?>
                                 </td>
-                                <td class="px-6 py-4 text-right text-slate-900 font-semibold">
-                                    <?= $student['total_sessions'] ?>
+                                <td class="px-6 py-4 text-right">
+                                    <span class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 font-semibold text-sm transition-all duration-300 hover:bg-emerald-200 hover:scale-105">
+                                        <?= $performance_points ?> pts
+                                    </span>
                                 </td>
                                 <td class="px-6 py-4 text-right">
                                     <span class="px-3 py-1 rounded-full bg-blue-100 text-blue-700 font-semibold text-sm transition-all duration-300 hover:bg-blue-200 hover:scale-105">
                                         <?= $student['total_hours'] ?> hrs
                                     </span>
                                 </td>
+                                <td class="px-6 py-4 text-right text-slate-700 font-semibold">
+                                    <?= $task_completion ?>%
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="7" class="px-6 py-8 text-center text-slate-500">
+                            <td colspan="8" class="px-6 py-8 text-center text-slate-500">
                                 No sit-in records yet
                             </td>
                         </tr>
@@ -179,7 +212,7 @@ $avg_hours = $pdo->query('SELECT ROUND(AVG(hours), 1) as avg FROM (SELECT ROUND(
     <!-- Info Footer -->
     <div class="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-6 animate-fadeIn" style="animation-delay: 0.8s;">
         <p class="text-sm text-slate-700">
-            <span class="font-semibold">How rankings work:</span> Students are ranked based on total sit-in hours completed. Hours are calculated from entry and exit times. Leaderboards are updated in real-time as new sit-in sessions are recorded.
+            <span class="font-semibold">How rankings work:</span> Performance points use the 50/30/20 weights (participation, sit-in hours, task completion). Participation and hours are normalized across the leaderboard, while task completion is capped at 100%.
         </p>
     </div>
 </main>
