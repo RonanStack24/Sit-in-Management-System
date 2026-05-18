@@ -26,28 +26,85 @@ $navLinkClass = function($page, $current) {
 
         <!-- Navigation Links -->
         <div class="flex items-center gap-5">
+            <?php if (!isset($_SESSION['user_id'])): ?>
+                <button class="sm:hidden inline-flex items-center justify-center w-9 h-9 rounded-lg border border-white/30 text-white/90 hover:text-white hover:bg-white/10 transition" type="button" aria-label="Toggle menu" onclick="document.getElementById('guestMobileMenu').classList.toggle('hidden')">
+                    <span class="text-lg">☰</span>
+                </button>
+            <?php endif; ?>
             
             <?php if (isset($_SESSION['user_id'])): ?>
+                <?php
+                    require_once 'db.php';
+                    $stmt = $pdo->prepare('SELECT COUNT(*) as count FROM notifications WHERE student_id = ? AND is_read = FALSE');
+                    $stmt->execute([$_SESSION['user_id']]);
+                    $unread = $stmt->fetch()['count'];
+
+                    $recent_stmt = $pdo->prepare('SELECT id, title, message, type, is_read, created_at FROM notifications WHERE student_id = ? ORDER BY created_at DESC LIMIT 5');
+                    $recent_stmt->execute([$_SESSION['user_id']]);
+                    $recent_notifications = $recent_stmt->fetchAll();
+                ?>
+
+                <button class="sm:hidden inline-flex items-center justify-center w-9 h-9 rounded-lg border border-white/30 text-white/90 hover:text-white hover:bg-white/10 transition" type="button" aria-label="Toggle menu" onclick="document.getElementById('studentMobileMenu').classList.toggle('hidden')">
+                    <span class="text-lg">☰</span>
+                </button>
+
                 <!-- Student Navigation - Minimal View -->
-                <a class="<?= $navLinkClass('dashboard', $current_page) ?> transition-all duration-300 hover:scale-105" href="dashboard.php">Dashboard</a>
+                <a class="hidden sm:inline-flex <?= $navLinkClass('dashboard', $current_page) ?> transition-all duration-300 hover:scale-105" href="dashboard.php">Dashboard</a>
                 
-                <a class="<?= $navLinkClass('notifications', $current_page) ?> relative transition-all duration-300 hover:scale-110" href="notifications.php">
-                    🔔
-                    <?php 
-                        require_once 'db.php';
-                        $stmt = $pdo->prepare('SELECT COUNT(*) as count FROM notifications WHERE student_id = ? AND is_read = FALSE');
-                        $stmt->execute([$_SESSION['user_id']]);
-                        $unread = $stmt->fetch()['count'];
-                        if ($unread > 0): 
-                    ?>
-                        <span class="absolute -top-2 -right-3 flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-red-600 rounded-full">
-                            <?= min($unread, 9) ?><?= $unread > 9 ? '+' : '' ?>
-                        </span>
-                    <?php endif; ?>
-                </a>
+                <div class="relative hidden sm:inline-flex" id="notifMenu">
+                    <button class="<?= $navLinkClass('notifications', $current_page) ?> relative transition-all duration-300 hover:scale-110 rounded-lg px-1.5 py-1 active:ring-2 active:ring-white/70 focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#003366]" type="button" aria-label="Notifications" onclick="document.getElementById('notifDropdown').classList.toggle('hidden')">
+                        🔔
+                        <?php if ($unread > 0): ?>
+                            <span class="absolute -top-2 -right-3 flex items-center justify-center w-4 h-4 text-[10px] font-bold text-white bg-red-600 rounded-sm border border-white/80">
+                                <?= min($unread, 9) ?><?= $unread > 9 ? '+' : '' ?>
+                            </span>
+                        <?php endif; ?>
+                    </button>
+
+                    <div id="notifDropdown" class="hidden absolute right-0 top-[140%] w-[320px] rounded-xl bg-white text-slate-800 shadow-[0_12px_30px_rgba(0,0,0,0.2)] border border-slate-200 z-20">
+                        <div class="px-4 py-3 border-b border-slate-200 flex items-center justify-between">
+                            <p class="text-sm font-semibold text-slate-900">Notifications</p>
+                            <span class="text-xs text-slate-500"><?= $unread ?> unread</span>
+                        </div>
+                        <div class="max-h-72 overflow-y-auto">
+                            <?php if (!empty($recent_notifications)): ?>
+                                <?php foreach ($recent_notifications as $notif): ?>
+                                    <?php
+                                        $date = new DateTime($notif['created_at']);
+                                        $time_label = $date->format('M d, h:i A');
+                                    ?>
+                                    <div class="px-4 py-3 border-b border-slate-100 hover:bg-slate-50 transition">
+                                        <div class="flex items-start gap-3">
+                                            <span class="text-sm"><?= htmlspecialchars($notif['type']) ?></span>
+                                            <div class="flex-1">
+                                                <p class="text-sm font-semibold text-slate-900 line-clamp-1">
+                                                    <?= htmlspecialchars($notif['title']) ?>
+                                                </p>
+                                                <p class="text-xs text-slate-600 line-clamp-2">
+                                                    <?= htmlspecialchars($notif['message']) ?>
+                                                </p>
+                                                <div class="mt-1 flex items-center justify-between">
+                                                    <span class="text-[11px] text-slate-400"><?= $time_label ?></span>
+                                                    <?php if (!$notif['is_read']): ?>
+                                                        <span class="text-[11px] text-blue-600 font-semibold">New</span>
+                                                    <?php endif; ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <div class="px-4 py-6 text-center text-sm text-slate-500">No notifications yet</div>
+                            <?php endif; ?>
+                        </div>
+                        <div class="px-4 py-2 border-t border-slate-200">
+                            <a class="text-sm font-semibold text-blue-700 hover:text-blue-800" href="notifications.php">View all notifications</a>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- More Menu Dropdown -->
-                <div class="relative" id="moreMenu">
+                <div class="relative hidden sm:inline-flex" id="moreMenu">
                     <button class="flex items-center gap-1 text-sm text-white/80 hover:text-white transition-all duration-300 hover:scale-105" type="button" onclick="document.getElementById('moreDropdown').classList.toggle('hidden')">
                         ⋯ More
                     </button>
@@ -67,8 +124,13 @@ $navLinkClass = function($page, $current) {
                 <script>
                     document.addEventListener('click', function(event) {
                         const moreMenu = document.getElementById('moreMenu');
-                        if (!moreMenu.contains(event.target)) {
+                        const notifMenu = document.getElementById('notifMenu');
+
+                        if (moreMenu && !moreMenu.contains(event.target)) {
                             document.getElementById('moreDropdown').classList.add('hidden');
+                        }
+                        if (notifMenu && !notifMenu.contains(event.target)) {
+                            document.getElementById('notifDropdown').classList.add('hidden');
                         }
                     });
                 </script>
@@ -83,4 +145,38 @@ $navLinkClass = function($page, $current) {
             <?php endif; ?>
         </div>
     </div>
+
+    <?php if (!isset($_SESSION['user_id'])): ?>
+        <div id="guestMobileMenu" class="sm:hidden hidden px-[5%] pb-4">
+            <div class="mt-2 rounded-xl bg-white/10 border border-white/20 p-3 flex flex-col gap-2">
+                <a class="text-sm <?= $navLinkClass('home', $current_page) ?>" href="index.php">Home</a>
+                <a class="text-sm <?= $navLinkClass('leaderboards', $current_page) ?>" href="leaderboards.php">Leaderboards</a>
+                <a class="text-sm <?= $navLinkClass('about', $current_page) ?>" href="about.php">About</a>
+                <a class="text-sm <?= $navLinkClass('login', $current_page) ?>" href="login.php">Login</a>
+                <a class="text-sm font-semibold text-white bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 transition-all duration-300 rounded-lg px-3 py-2 text-center" href="register.php">Register</a>
+            </div>
+        </div>
+    <?php else: ?>
+        <div id="studentMobileMenu" class="sm:hidden hidden px-[5%] pb-4">
+            <div class="mt-2 rounded-xl bg-white/10 border border-white/20 p-3 flex flex-col gap-2">
+                <a class="text-sm <?= $navLinkClass('dashboard', $current_page) ?>" href="dashboard.php">Dashboard</a>
+                <a class="text-sm <?= $navLinkClass('notifications', $current_page) ?> flex items-center justify-between" href="notifications.php">
+                    <span>Notifications</span>
+                    <?php if ($unread > 0): ?>
+                        <span class="inline-flex items-center justify-center w-4 h-4 text-[10px] font-bold text-white bg-red-600 rounded-sm border border-white/80">
+                            <?= min($unread, 9) ?><?= $unread > 9 ? '+' : '' ?>
+                        </span>
+                    <?php endif; ?>
+                </a>
+                <a class="text-sm <?= $navLinkClass('announcements', $current_page) ?>" href="announcements.php">Announcements</a>
+                <a class="text-sm <?= $navLinkClass('sitin_history', $current_page) ?>" href="sitin_history.php">Sit-in History</a>
+                <a class="text-sm <?= $navLinkClass('detailed_sessions', $current_page) ?>" href="detailed_sessions.php">Session Details</a>
+                <a class="text-sm <?= $navLinkClass('summary', $current_page) ?>" href="sitin_summary.php">Summary</a>
+                <a class="text-sm <?= $navLinkClass('reservation', $current_page) ?>" href="lab_reservation.php">Lab Reservations</a>
+                <a class="text-sm <?= $navLinkClass('feedback', $current_page) ?>" href="feedback.php">Feedback</a>
+                <a class="text-sm <?= $navLinkClass('profile', $current_page) ?>" href="profile.php">My Profile</a>
+                <a class="text-sm font-semibold text-red-100 bg-red-500/80 hover:bg-red-500 transition-all duration-300 rounded-lg px-3 py-2 text-center" href="logout.php">Logout</a>
+            </div>
+        </div>
+    <?php endif; ?>
 </nav>
