@@ -119,37 +119,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <form action="register.php" method="post" class="grid gap-3">
                         <div>
                             <label class="text-xs font-semibold text-slate-600" for="id_number">ID Number</label>
-                            <input class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200/60" id="id_number" name="id_number" type="text" placeholder="Enter your ID" autocomplete="off" required>
+                            <input class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200/60" id="id_number" name="id_number" type="text" placeholder="Enter your ID" value="<?= htmlspecialchars($_POST['id_number'] ?? '', ENT_QUOTES) ?>" autocomplete="off" required>
                         </div>
 
                         <div>
                             <label class="text-xs font-semibold text-slate-600" for="last_name">Last Name</label>
-                            <input class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200/60" id="last_name" name="last_name" type="text" placeholder="Enter your last name" autocomplete="family-name" required>
+                            <input class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200/60" id="last_name" name="last_name" type="text" placeholder="Enter your last name" value="<?= htmlspecialchars($_POST['last_name'] ?? '', ENT_QUOTES) ?>" autocomplete="family-name" required>
                         </div>
 
                         <div>
                             <label class="text-xs font-semibold text-slate-600" for="first_name">First Name</label>
-                            <input class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200/60" id="first_name" name="first_name" type="text" placeholder="Enter your first name" autocomplete="given-name" required>
+                            <input class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200/60" id="first_name" name="first_name" type="text" placeholder="Enter your first name" value="<?= htmlspecialchars($_POST['first_name'] ?? '', ENT_QUOTES) ?>" autocomplete="given-name" required>
                         </div>
 
                         <div>
                             <label class="text-xs font-semibold text-slate-600" for="middle_name">Middle Name</label>
-                            <input class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200/60" id="middle_name" name="middle_name" type="text" placeholder="Enter your middle name" autocomplete="additional-name">
+                            <input class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200/60" id="middle_name" name="middle_name" type="text" placeholder="Enter your middle name" value="<?= htmlspecialchars($_POST['middle_name'] ?? '', ENT_QUOTES) ?>" autocomplete="additional-name">
                         </div>
 
                         <div>
                             <label class="text-xs font-semibold text-slate-600" for="course">Course</label>
-                            <input class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200/60" id="course" name="course" type="text" placeholder="BSIT" required>
+                            <input class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200/60" id="course" name="course" type="text" placeholder="BSIT" value="<?= htmlspecialchars($_POST['course'] ?? '', ENT_QUOTES) ?>" required>
                         </div>
 
                         <div>
                             <label class="text-xs font-semibold text-slate-600" for="course_level">Course Level</label>
-                            <input class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200/60" id="course_level" name="course_level" type="text" placeholder="e.g. 1">
+                            <input class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200/60" id="course_level" name="course_level" type="text" placeholder="e.g. 1" value="<?= htmlspecialchars($_POST['course_level'] ?? '', ENT_QUOTES) ?>">
                         </div>
 
                         <div>
                             <label class="text-xs font-semibold text-slate-600" for="email">Email</label>
-                            <input class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200/60" id="email" name="email" type="email" placeholder="name@example.com" autocomplete="email" required>
+                            <input class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200/60" id="email" name="email" type="email" placeholder="name@example.com" value="<?= htmlspecialchars($_POST['email'] ?? '', ENT_QUOTES) ?>" autocomplete="email" required>
                         </div>
 
                         <div>
@@ -164,7 +164,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                         <div>
                             <label class="text-xs font-semibold text-slate-600" for="address">Address</label>
-                            <input class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200/60" id="address" name="address" type="text" placeholder="Street, City, Province" autocomplete="street-address" required>
+                            <input class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200/60" id="address" name="address" type="text" placeholder="Street, City, Province" value="<?= htmlspecialchars($_POST['address'] ?? '', ENT_QUOTES) ?>" autocomplete="street-address" required>
                         </div>
 
                         <button class="mt-2 inline-flex items-center rounded-lg bg-[#003366] px-6 py-2.5 text-sm font-semibold text-white hover:bg-[#004b93] transition" type="submit">Register</button>

@@ -96,7 +96,7 @@ $most_frequent_purpose_count = $purposes_count ? max($purposes_count) : 0;
 <main class="max-w-7xl mx-auto px-5 py-10">
     <!-- Page Title -->
     <div class="mb-8">
-        <h1 class="text-3xl font-bold text-slate-900 mb-2">📊 Sit-in Summary</h1>
+        <h1 class="text-3xl font-bold text-slate-900 mb-2">Sit-in Summary</h1>
         <p class="text-slate-600">Your comprehensive sit-in analytics and statistics</p>
     </div>
 
@@ -106,7 +106,7 @@ $most_frequent_purpose_count = $purposes_count ? max($purposes_count) : 0;
         <div class="bg-white border border-slate-200 rounded-lg shadow-sm p-6 hover:shadow-md transition">
             <div class="flex items-center justify-between mb-2">
                 <p class="text-xs font-semibold text-slate-500 uppercase tracking-wide">Total Sessions</p>
-                <span class="text-2xl">📝</span>
+                <span class="text-2xl"></span>
             </div>
             <p class="text-4xl font-bold text-[#003366] mb-1"><?= $total_sessions ?></p>
             <p class="text-xs text-slate-600">session<?= $total_sessions !== 1 ? 's' : '' ?> completed</p>
@@ -116,7 +116,7 @@ $most_frequent_purpose_count = $purposes_count ? max($purposes_count) : 0;
         <div class="bg-white border border-slate-200 rounded-lg shadow-sm p-6 hover:shadow-md transition">
             <div class="flex items-center justify-between mb-2">
                 <p class="text-xs font-semibold text-slate-500 uppercase tracking-wide">Total Hours</p>
-                <span class="text-2xl">⏱️</span>
+                <span class="text-2xl"></span>
             </div>
             <p class="text-4xl font-bold text-blue-600 mb-1"><?= $total_hours_int ?>h <?= $total_mins ?>m</p>
             <p class="text-xs text-slate-600"><?= number_format($total_hours, 1) ?> hours total</p>
@@ -126,7 +126,7 @@ $most_frequent_purpose_count = $purposes_count ? max($purposes_count) : 0;
         <div class="bg-white border border-slate-200 rounded-lg shadow-sm p-6 hover:shadow-md transition">
             <div class="flex items-center justify-between mb-2">
                 <p class="text-xs font-semibold text-slate-500 uppercase tracking-wide">Average Duration</p>
-                <span class="text-2xl">📊</span>
+                <span class="text-2xl"></span>
             </div>
             <p class="text-4xl font-bold text-green-600 mb-1"><?= $average_duration_hours ?>h <?= $average_duration_mins ?>m</p>
             <p class="text-xs text-slate-600">per session</p>
@@ -136,7 +136,7 @@ $most_frequent_purpose_count = $purposes_count ? max($purposes_count) : 0;
         <div class="bg-white border border-slate-200 rounded-lg shadow-sm p-6 hover:shadow-md transition">
             <div class="flex items-center justify-between mb-2">
                 <p class="text-xs font-semibold text-slate-500 uppercase tracking-wide">Longest Session</p>
-                <span class="text-2xl">🏆</span>
+                <span class="text-2xl"></span>
             </div>
             <p class="text-4xl font-bold text-purple-600 mb-1"><?= $longest_hours ?>h <?= $longest_mins ?>m</p>
             <p class="text-xs text-slate-600"><?= $total_sessions > 0 ? 'your record' : 'no data' ?></p>
@@ -147,7 +147,7 @@ $most_frequent_purpose_count = $purposes_count ? max($purposes_count) : 0;
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         <!-- Lab Usage -->
         <div class="bg-white border border-slate-200 rounded-lg shadow-sm p-6">
-            <h2 class="text-lg font-bold text-slate-900 mb-4">🏫 Lab Usage</h2>
+            <h2 class="text-lg font-bold text-slate-900 mb-4">Lab Usage</h2>
             
             <?php if (count($labs_count) > 0): ?>
                 <div class="space-y-3">
@@ -174,7 +174,7 @@ $most_frequent_purpose_count = $purposes_count ? max($purposes_count) : 0;
 
         <!-- Sit-in Purpose -->
         <div class="bg-white border border-slate-200 rounded-lg shadow-sm p-6">
-            <h2 class="text-lg font-bold text-slate-900 mb-4">📌 Sit-in Purpose</h2>
+            <h2 class="text-lg font-bold text-slate-900 mb-4">Sit-in Purpose</h2>
             
             <?php if (count($purposes_count) > 0): ?>
                 <div class="space-y-3">

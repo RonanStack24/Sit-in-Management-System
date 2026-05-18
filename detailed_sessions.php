@@ -79,7 +79,7 @@ $avg_duration = $total_sessions > 0 ? round(array_sum(array_column($sessions, 'd
 <main class="max-w-7xl mx-auto px-5 py-10">
     <!-- Page Title -->
     <div class="mb-10 animate-slideUp">
-        <h1 class="text-4xl font-bold text-slate-900 mb-2">📋 Detailed Session Records</h1>
+        <h1 class="text-4xl font-bold text-slate-900 mb-2">Detailed Session Records</h1>
         <p class="text-slate-600">View all your sit-in sessions with complete information</p>
     </div>
 

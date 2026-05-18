@@ -11,6 +11,11 @@ if (isset($_GET['logout']) && $_GET['logout'] === '1') {
     $logout_message = 'You have been logged out.';
 }
 
+// Check for registration success
+if (isset($_GET['registered']) && $_GET['registered'] === '1') {
+    $success = 'Registration successful. Please sign in.';
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username'] ?? '');
     $password = trim($_POST['password'] ?? '');
@@ -221,7 +226,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div>
                             <div class="flex items-center justify-between mb-1">
                                 <label class="text-xs font-semibold text-slate-600" for="password">Password</label>
-                                <a href="forgot-password.php" class="text-xs text-indigo-600 hover:underline">Forgot password?</a>
                             </div>
                             <input
                                 class="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200/60"
@@ -232,6 +236,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 autocomplete="current-password"
                                 required
                             >
+                            <div class="mt-2 flex justify-end">
+                                <a href="forgot-password.php" class="text-xs text-indigo-600 hover:underline">Forgot password?</a>
+                            </div>
                         </div>
 
                         <div class="flex items-center gap-2">

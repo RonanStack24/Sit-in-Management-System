@@ -20,7 +20,6 @@ $stmt = $pdo->query('
     FROM students s
     LEFT JOIN sitin_sessions ss ON s.id = ss.student_id
     GROUP BY s.id, s.first_name, s.last_name, s.id_number, s.course, s.profile_photo
-    HAVING total_sessions > 0
     ORDER BY total_hours DESC
     LIMIT 50
 ');
